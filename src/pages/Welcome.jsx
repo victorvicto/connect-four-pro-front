@@ -4,6 +4,7 @@ function Welcome() {
   
     return (
       <div>
+        coucou
         <FatButton />
         <FatButton />
         <FatButton />
