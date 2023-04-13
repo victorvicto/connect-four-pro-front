@@ -1,3 +1,5 @@
+import FatButton from '../components/FatButton.jsx'
+
 function Login() {
   
     return (
@@ -12,9 +14,12 @@ function Login() {
                 <br/>
                 <input type="checkbox"/> Remember me
                 <br/>
-                <button type="submit">Login</button>   
-                <button type="button"> Cancel</button>
-                <br/>   
+                <button type="submit" className='fat-btn'>
+                    <div className="fat-btn-top">
+                        Login
+                    </div>
+                </button>   
+                <FatButton label="Cancel" path="/"/>
                 Forgot <a href="#"> password? </a>   
             </div>   
         </form>

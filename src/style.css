@@ -22,6 +22,10 @@ body{
   background-repeat: no-repeat;
 }
 
+button {
+  font-family: var(--main-font-family);
+}
+
 #root {
   margin: 0pt;
   height: 100vh;
@@ -51,7 +55,7 @@ a {
   font-weight: 800 !important;
   text-align: center;
   text-transform: uppercase;
-  transition: 0.1s;
+  transition: 0.05s;
   transition-timing-function: ease-out;
   transform: translate(0pt, -5pt);
 }
@@ -65,12 +69,20 @@ a {
 }
 
 .fat-btn {
+  width: 100%;
+  border-style: none;
+  cursor: pointer;
   border-radius: 10pt;
   background-color: var(--main-btn-shadow);
   margin-bottom: 1.5em;
   box-shadow: 3pt 3pt #2021;
-  transition: 0.1s;
+  transition: 0.05s;
+  padding: 0pt;
   transition-timing-function: ease-out;
+}
+
+a:last-child>.fat-btn {
+  margin-bottom: 0pt;
 }
 
 .fat-btn:hover {
@@ -89,8 +101,8 @@ a {
   box-shadow: 10pt 10pt #2021;
 }
 
-.form-container * {
-  margin-bottom: 1em;
+.form-container>* {
+  margin-bottom: 10pt;
 }
 
 input {
