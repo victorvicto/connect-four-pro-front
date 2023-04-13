@@ -51,7 +51,7 @@ a {
   border: var(--main-btn-shadow) 3pt solid;
   display: block;
   padding: 0.5em;
-  font-size: 30pt;
+  font-size: 20pt;
   font-weight: 800 !important;
   text-align: center;
   text-transform: uppercase;
@@ -74,7 +74,7 @@ a {
   cursor: pointer;
   border-radius: 10pt;
   background-color: var(--main-btn-shadow);
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   box-shadow: 3pt 3pt #2021;
   transition: 0.05s;
   padding: 0pt;
@@ -99,6 +99,7 @@ a:last-child>.fat-btn {
   border: 3pt var(--main-grey) solid;
   padding: 1.5em;
   box-shadow: 10pt 10pt #2021;
+  max-width: 70vw;
 }
 
 .form-container>* {
@@ -113,5 +114,6 @@ input {
   font-size: var(--main-font-size);
   font-family: var(--main-font-family);
   color: var(--main-font-color);
+  max-width: 98%;
 }
   
