@@ -1,7 +1,15 @@
-function FatButton() {
+import {Link} from "react-router-dom";
+
+function FatButton({ label, path }) {
   
     return (
-        <button href={`/cul`}>Your Name</button>
+        <Link to={path}>
+            <div className="fat-btn">
+                <div className="fat-btn-top">
+                    {label}
+                </div>
+            </div>
+        </Link>
     )
   }
   

@@ -1,113 +1,105 @@
-#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
-  
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
-  
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
-    }
-  }
-  
-  .card {
-    padding: 2em;
-  }
-  
-  .read-the-docs {
-    color: #888;
-  }
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,600,800');
 
-  :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-  
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-  
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-  }
-  
-  a {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-  }
-  a:hover {
-    color: #535bf2;
-  }
-  
-  body {
-    margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
-  }
-  
-  h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-  }
-  
-  button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
-  }
-  button:hover {
-    border-color: #646cff;
-  }
-  button:focus,
-  button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-  }
-  
-  @media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
-    a:hover {
-      color: #747bff;
-    }
-    button {
-      background-color: #f9f9f9;
-    }
-  }
+body{
+  --main-white: ghostwhite;
+  --main-grey: lightgrey;
+  --main-dark: rgb(102, 102, 102);
+  --main-font-color: var(--main-dark);
+  --main-font-weight: 600;
+  --main-font-size: 15pt;
+  --main-font-family: Montserrat, sans-serif;
+  --main-bg-color: rgb(255, 206, 188);
+  --main-btn-color: rgb(65, 65, 134);
+  --main-btn-shadow: #225;
+  color: var(--main-font-color);
+  font-weight: var(--main-font-weight);
+  font-size: var(--main-font-size);
+  min-height: 100vh;
+  margin: 0pt;
+  font-family: var(--main-font-family);
+  background: linear-gradient(315deg, rgba(255,194,162,1) 0%, rgba(255,223,196,1) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#root {
+  margin: 0pt;
+  height: 100vh;
+}
+
+.centering-page {
+  display: flex;
+  margin:auto;
+  width: 80vw;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.fat-btn-top {
+  color: var(--main-white);
+  background-color: var(--main-btn-color);
+  border-radius: 10pt;
+  border: var(--main-btn-shadow) 3pt solid;
+  display: block;
+  padding: 0.5em;
+  font-size: 30pt;
+  font-weight: 800 !important;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.1s;
+  transition-timing-function: ease-out;
+  transform: translate(0pt, -5pt);
+}
+
+.fat-btn-top:hover {
+  transform: translate(0pt, -8pt);
+}
+
+.fat-btn-top:active {
+  transform: translate(0pt, -2pt);
+}
+
+.fat-btn {
+  border-radius: 10pt;
+  background-color: var(--main-btn-shadow);
+  margin-bottom: 1.5em;
+  box-shadow: 3pt 3pt #2021;
+  transition: 0.1s;
+  transition-timing-function: ease-out;
+}
+
+.fat-btn:hover {
+  box-shadow: 4pt 4pt #2021;
+}
+
+.fat-btn:active {
+  box-shadow: 1pt 1pt #2021;
+}
+
+.form-container {
+  background-color: var(--main-white);
+  border-radius: 10pt;
+  border: 3pt var(--main-grey) solid;
+  padding: 1.5em;
+  box-shadow: 10pt 10pt #2021;
+}
+
+.form-container * {
+  margin-bottom: 1em;
+}
+
+input {
+  border-radius: 5pt;
+  border: 2pt var(--main-grey) solid;
+  height: 1.5em;
+  font-weight: var(--main-font-weight);
+  font-size: var(--main-font-size);
+  font-family: var(--main-font-family);
+  color: var(--main-font-color);
+}
   
