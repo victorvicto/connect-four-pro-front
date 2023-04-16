@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
+  redirect
 } from "react-router-dom";
 import Welcome from './pages/Welcome'
+import ErrorPage from './pages/ErrorPage'
 import Login from './pages/Login'
 import App from './pages/App'
 import './style.css'
@@ -13,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Welcome />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/cul",

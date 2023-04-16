@@ -4,13 +4,14 @@ body{
   --main-white: ghostwhite;
   --main-grey: lightgrey;
   --main-dark: rgb(102, 102, 102);
-  --main-font-color: var(--main-dark);
+  --main-bg-color: rgb(255, 206, 188);
+  --main-primary-color: rgb(65, 65, 134);
+  --main-primary-color-dark: #225;
+  --main-shadow: #2021;
+  --main-font-color: var(--main-primary-color);
   --main-font-weight: 600;
   --main-font-size: 15pt;
   --main-font-family: Montserrat, sans-serif;
-  --main-bg-color: rgb(255, 206, 188);
-  --main-btn-color: rgb(65, 65, 134);
-  --main-btn-shadow: #225;
   color: var(--main-font-color);
   font-weight: var(--main-font-weight);
   font-size: var(--main-font-size);
@@ -34,10 +35,11 @@ button {
 .centering-page {
   display: flex;
   margin:auto;
-  width: 80vw;
+  width: 75vw;
   height: 100%;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 a {
@@ -46,9 +48,9 @@ a {
 
 .fat-btn-top {
   color: var(--main-white);
-  background-color: var(--main-btn-color);
+  background-color: var(--main-primary-color);
   border-radius: 10pt;
-  border: var(--main-btn-shadow) 3pt solid;
+  border: var(--main-primary-color-dark) 3pt solid;
   display: block;
   padding: 0.5em;
   font-size: 20pt;
@@ -73,9 +75,9 @@ a {
   border-style: none;
   cursor: pointer;
   border-radius: 10pt;
-  background-color: var(--main-btn-shadow);
+  background-color: var(--main-primary-color-dark);
   margin-bottom: 1em;
-  box-shadow: 3pt 3pt #2021;
+  box-shadow: 3pt 3pt var(--main-shadow);
   transition: 0.05s;
   padding: 0pt;
   transition-timing-function: ease-out;
@@ -86,24 +88,29 @@ a:last-child>.fat-btn {
 }
 
 .fat-btn:hover {
-  box-shadow: 4pt 4pt #2021;
+  box-shadow: 4pt 4pt var(--main-shadow);
 }
 
 .fat-btn:active {
-  box-shadow: 1pt 1pt #2021;
+  box-shadow: 1pt 1pt var(--main-shadow);
 }
 
-.form-container {
+.pannel {
   background-color: var(--main-white);
   border-radius: 10pt;
   border: 3pt var(--main-grey) solid;
   padding: 1.5em;
-  box-shadow: 10pt 10pt #2021;
+  box-shadow: 10pt 10pt var(--main-shadow);
   max-width: 70vw;
+  color: var(--main-dark)
 }
 
-.form-container>* {
+form>* {
   margin-bottom: 10pt;
+}
+
+.shadow-text {
+    color: var(--main-shadow);
 }
 
 input {
@@ -115,5 +122,11 @@ input {
   font-family: var(--main-font-family);
   color: var(--main-font-color);
   max-width: 98%;
+}
+
+h1 {
+    color: var(--main-primary-color);
+    text-shadow: 3pt 3pt var(--main-shadow);
+    font-size: 3em;
 }
   
