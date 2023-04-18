@@ -6,13 +6,14 @@ function Login() {
       <div id="login-page" className='centering-page'>
         <div className="pannel">   
           <form>
-            <label>Username : </label>   
+            {/* <label>Username : </label>    */}
             <input type="text" placeholder="Enter Username" name="username" required />
-            <br/>
-            <label>Password :  </label>   
+            {/* <br/> */}
+            {/* <label>Password :  </label>    */}
             <input type="password" placeholder="Enter Password" name="password" required />
-            <br/>
-            <input type="checkbox"/> Remember me
+            {/* <br/> */}
+            <input id="remember" type="checkbox" name="remember"/>
+            <label for="remember">Remember me</label>
             <br/>
             <button type="submit" className='fat-btn'>
                 <div className="fat-btn-top">

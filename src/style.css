@@ -12,6 +12,7 @@ body{
   --main-font-weight: 600;
   --main-font-size: 15pt;
   --main-font-family: Montserrat, sans-serif;
+  --quick-transition-time: 0.1s;
   color: var(--main-font-color);
   font-weight: var(--main-font-weight);
   font-size: var(--main-font-size);
@@ -57,7 +58,7 @@ a {
   font-weight: 800 !important;
   text-align: center;
   text-transform: uppercase;
-  transition: 0.05s;
+  transition: var(--quick-transition-time);
   transition-timing-function: ease-out;
   transform: translate(0pt, -5pt);
 }
@@ -77,10 +78,12 @@ a {
   border-radius: 10pt;
   background-color: var(--main-primary-color-dark);
   margin-bottom: 1em;
+  margin-top: 5pt;
   box-shadow: 3pt 3pt var(--main-shadow);
-  transition: 0.05s;
+  transition: var(--quick-transition-time);
   padding: 0pt;
   transition-timing-function: ease-out;
+  text-align: center;
 }
 
 a:last-child>.fat-btn {
@@ -102,7 +105,12 @@ a:last-child>.fat-btn {
   padding: 1.5em;
   box-shadow: 10pt 10pt var(--main-shadow);
   max-width: 70vw;
+  width: 300pt;
   color: var(--main-dark)
+}
+
+form {
+  text-align: left;
 }
 
 form>* {
@@ -121,7 +129,14 @@ input {
   font-size: var(--main-font-size);
   font-family: var(--main-font-family);
   color: var(--main-font-color);
-  max-width: 98%;
+  width: 98%;
+  padding-left: .5em;
+}
+
+input[type=checkbox] {
+  width: 1em;
+  height: 1em;
+  margin-right: .5em;
 }
 
 h1 {

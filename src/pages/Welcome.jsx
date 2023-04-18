@@ -5,7 +5,7 @@ function Welcome() {
     return (
       <div id="welcome-page" className='centering-page'>
         <div>
-          <FatButton label="Join as guest" path="/cul"/>
+          <FatButton label="Play as guest" path="/cul"/>
           <FatButton label="Login" path="/login"/>
           <FatButton label="Create an account" path="/register"/>
         </div>
