@@ -9,10 +9,13 @@ body{
     --main-primary-color-dark: #225;
     --main-shadow: #2021;
     --main-font-color: var(--main-primary-color);
+    --error-font-color: crimson;
     --main-font-weight: 600;
     --main-font-size: 15pt;
     --main-font-family: Montserrat, sans-serif;
     --quick-transition-time: 0.1s;
+    --main-border-radius: 10pt;
+    --small-border-radius: 5pt;
     color: var(--main-font-color);
     font-weight: var(--main-font-weight);
     font-size: var(--main-font-size);
@@ -27,6 +30,15 @@ body{
 p {
     font-weight: 400;
 }
+
+.error {
+    font-weight: 600;
+    color: var(--error-font-color);
+}
+
+/* .error::before {
+    content: "! ";
+} */
 
 button {
     font-family: var(--main-font-family);
@@ -54,7 +66,7 @@ a {
 .fat-btn-top {
     color: var(--main-white);
     background-color: var(--main-primary-color);
-    border-radius: 10pt;
+    border-radius: var(--main-border-radius);
     border: var(--main-primary-color-dark) 3pt solid;
     display: block;
     padding: 0.5em;
@@ -79,7 +91,7 @@ a {
     width: 100%;
     border-style: none;
     cursor: pointer;
-    border-radius: 10pt;
+    border-radius: var(--main-border-radius);
     background-color: var(--main-primary-color-dark);
     margin-bottom: 1em;
     margin-top: 5pt;
@@ -104,7 +116,7 @@ a:last-child>.fat-btn {
 
 .pannel {
     background-color: var(--main-white);
-    border-radius: 10pt;
+    border-radius: var(--main-border-radius);
     border: 3pt var(--main-grey) solid;
     padding: 1.5em;
     box-shadow: 10pt 10pt var(--main-shadow);
@@ -131,7 +143,7 @@ form>* {
 }
 
 input {
-    border-radius: 5pt;
+    border-radius: var(--small-border-radius);
     border: 2pt var(--main-grey) solid;
     height: 2em;
     font-weight: var(--main-font-weight);
@@ -157,5 +169,18 @@ h1 {
     color: var(--main-primary-color);
     text-shadow: 3pt 3pt var(--main-shadow);
     font-size: 3em;
+}
+
+.error-pannel {
+    background-color: var(--error-font-color);
+    color: var(--main-white);
+    font-weight: 600;
+    border-radius: var(--small-border-radius);
+    padding: 15pt;
+}
+
+.error-pannel p {
+    font-weight: 600;
+    margin: 0pt;
 }
   
