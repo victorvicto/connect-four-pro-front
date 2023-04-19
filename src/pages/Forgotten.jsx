@@ -1,26 +1,26 @@
 import FatButton from '../components/FatButton.jsx'
 
-function Register() {
+function Forgotten() {
   
     return (
       <div id="login-page" className='centering-page'>
         <div className="pannel">   
           <form>
-            <h2>Create Account</h2>
+            {/* <label>Email : </label>    */}
+            <h2>Forgot password?</h2>
+            <p>Please provide your user email. We will provide you with a link to restet your password.</p>
             <input type="email" placeholder="Email" name="email" required />
-            <input type="text" placeholder="Username" name="username" required />
-            <input type="password" placeholder="Password" name="password" required />
-            <input type="password" placeholder="Confirm Password" name="passwordconf" required />
+            <br/>
             <button type="submit" className='fat-btn'>
                 <div className="fat-btn-top">
-                    Register
+                    Send email
                 </div>
             </button>   
-            <FatButton label="Cancel" path="/"/>   
+            <FatButton label="Cancel" path="/login"/>
           </form>
         </div>
       </div>
     )
 }
   
-export default Register
+export default Forgotten

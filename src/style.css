@@ -1,120 +1,129 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,600,800');
 
 body{
-  --main-white: ghostwhite;
-  --main-grey: lightgrey;
-  --main-dark: rgb(102, 102, 102);
-  --main-bg-color: rgb(255, 206, 188);
-  --main-primary-color: rgb(65, 65, 134);
-  --main-primary-color-dark: #225;
-  --main-shadow: #2021;
-  --main-font-color: var(--main-primary-color);
-  --main-font-weight: 600;
-  --main-font-size: 15pt;
-  --main-font-family: Montserrat, sans-serif;
-  --quick-transition-time: 0.1s;
-  color: var(--main-font-color);
-  font-weight: var(--main-font-weight);
-  font-size: var(--main-font-size);
-  min-height: 100vh;
-  margin: 0pt;
-  font-family: var(--main-font-family);
-  background: linear-gradient(315deg, rgba(255,194,162,1) 0%, rgba(255,223,196,1) 100%);
-  background-size: cover;
-  background-repeat: no-repeat;
+    --main-white: ghostwhite;
+    --main-grey: lightgrey;
+    --main-dark: rgb(102, 102, 102);
+    --main-bg-color: rgb(255, 206, 188);
+    --main-primary-color: rgb(65, 65, 134);
+    --main-primary-color-dark: #225;
+    --main-shadow: #2021;
+    --main-font-color: var(--main-primary-color);
+    --main-font-weight: 600;
+    --main-font-size: 15pt;
+    --main-font-family: Montserrat, sans-serif;
+    --quick-transition-time: 0.1s;
+    color: var(--main-font-color);
+    font-weight: var(--main-font-weight);
+    font-size: var(--main-font-size);
+    min-height: 100vh;
+    margin: 0pt;
+    font-family: var(--main-font-family);
+    background: linear-gradient(315deg, rgba(255,194,162,1) 0%, rgba(255,223,196,1) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+p {
+    font-weight: 400;
 }
 
 button {
-  font-family: var(--main-font-family);
+    font-family: var(--main-font-family);
 }
 
 #root {
-  margin: 0pt;
-  height: 100vh;
+    margin: 0pt;
+    height: 100vh;
 }
 
 .centering-page {
-  display: flex;
-  margin:auto;
-  width: 75vw;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+    display: flex;
+    margin:auto;
+    width: 75vw;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 a {
-  text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 .fat-btn-top {
-  color: var(--main-white);
-  background-color: var(--main-primary-color);
-  border-radius: 10pt;
-  border: var(--main-primary-color-dark) 3pt solid;
-  display: block;
-  padding: 0.5em;
-  font-size: 20pt;
-  font-weight: 800 !important;
-  text-align: center;
-  text-transform: uppercase;
-  transition: var(--quick-transition-time);
-  transition-timing-function: ease-out;
-  transform: translate(0pt, -5pt);
+    color: var(--main-white);
+    background-color: var(--main-primary-color);
+    border-radius: 10pt;
+    border: var(--main-primary-color-dark) 3pt solid;
+    display: block;
+    padding: 0.5em;
+    font-size: 20pt;
+    font-weight: 800 !important;
+    text-align: center;
+    text-transform: uppercase;
+    transition: var(--quick-transition-time);
+    transition-timing-function: ease-out;
+    transform: translate(0pt, -5pt);
 }
 
 .fat-btn-top:hover {
-  transform: translate(0pt, -8pt);
+    transform: translate(0pt, -8pt);
 }
 
 .fat-btn-top:active {
-  transform: translate(0pt, -2pt);
+    transform: translate(0pt, -2pt);
 }
 
 .fat-btn {
-  width: 100%;
-  border-style: none;
-  cursor: pointer;
-  border-radius: 10pt;
-  background-color: var(--main-primary-color-dark);
-  margin-bottom: 1em;
-  margin-top: 5pt;
-  box-shadow: 3pt 3pt var(--main-shadow);
-  transition: var(--quick-transition-time);
-  padding: 0pt;
-  transition-timing-function: ease-out;
-  text-align: center;
+    width: 100%;
+    border-style: none;
+    cursor: pointer;
+    border-radius: 10pt;
+    background-color: var(--main-primary-color-dark);
+    margin-bottom: 1em;
+    margin-top: 5pt;
+    box-shadow: 3pt 3pt var(--main-shadow);
+    transition: var(--quick-transition-time);
+    padding: 0pt;
+    transition-timing-function: ease-out;
+    text-align: center;
 }
 
 a:last-child>.fat-btn {
-  margin-bottom: 0pt;
+    margin-bottom: 0pt;
 }
 
 .fat-btn:hover {
-  box-shadow: 4pt 4pt var(--main-shadow);
+    box-shadow: 4pt 4pt var(--main-shadow);
 }
 
 .fat-btn:active {
-  box-shadow: 1pt 1pt var(--main-shadow);
+    box-shadow: 1pt 1pt var(--main-shadow);
 }
 
 .pannel {
-  background-color: var(--main-white);
-  border-radius: 10pt;
-  border: 3pt var(--main-grey) solid;
-  padding: 1.5em;
-  box-shadow: 10pt 10pt var(--main-shadow);
-  max-width: 70vw;
-  width: 300pt;
-  color: var(--main-dark)
+    background-color: var(--main-white);
+    border-radius: 10pt;
+    border: 3pt var(--main-grey) solid;
+    padding: 1.5em;
+    box-shadow: 10pt 10pt var(--main-shadow);
+    max-width: 70vw;
+    width: 300pt;
+    color: var(--main-dark);
+}
+
+.pannel h2 {
+    margin-top: 0pt;
+    margin-bottom: 15pt;
 }
 
 form {
-  text-align: left;
+    text-align: left;
 }
 
 form>* {
-  margin-bottom: 10pt;
+    margin-bottom: 10pt;
 }
 
 .shadow-text {
@@ -122,21 +131,26 @@ form>* {
 }
 
 input {
-  border-radius: 5pt;
-  border: 2pt var(--main-grey) solid;
-  height: 1.5em;
-  font-weight: var(--main-font-weight);
-  font-size: var(--main-font-size);
-  font-family: var(--main-font-family);
-  color: var(--main-font-color);
-  width: 98%;
-  padding-left: .5em;
+    border-radius: 5pt;
+    border: 2pt var(--main-grey) solid;
+    height: 2em;
+    font-weight: var(--main-font-weight);
+    font-size: var(--main-font-size);
+    font-family: var(--main-font-family);
+    color: var(--main-font-color);
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: .5em;
+}
+
+input:last-of-type {
+    margin-bottom: 15pt;
 }
 
 input[type=checkbox] {
-  width: 1em;
-  height: 1em;
-  margin-right: .5em;
+    width: 1em;
+    height: 1em;
+    margin-right: .5em;
 }
 
 h1 {
