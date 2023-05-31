@@ -10,7 +10,7 @@ import ErrorPage from './pages/ErrorPage'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Forgotten from './pages/Forgotten'
-import App from './pages/App'
+import DashBoard from './pages/DashBoard'
 import './style.css'
 
 const router = createBrowserRouter([
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
     },
     {
-        path: "/cul",
-        element: <App />,
+        path: "/dashboard",
+        element: <DashBoard />,
     },
     {
         path: "/login",

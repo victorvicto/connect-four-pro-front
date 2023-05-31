@@ -2,14 +2,14 @@ import { useState } from 'react'
 import reactLogo from '/logos/react.svg'
 import viteLogo from '/logos/vite.svg'
 
-function App() {
-    const [count, setCount] = useState(0)
+function DashBoard() {
+    const player_name = "guest player";
 
     return (
         <div className="centering-page">
-            <h1>Welcome player!</h1>
+            <h1>Welcome { player_name }!</h1>
         </div>
     )
 }
 
-export default App
+export default DashBoard

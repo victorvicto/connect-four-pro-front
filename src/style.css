@@ -107,7 +107,7 @@ a:last-child>.fat-btn {
 }
 
 .fat-btn:hover {
-    box-shadow: 4pt 4pt var(--main-shadow);
+    box-shadow: 5pt 5pt var(--main-shadow);
 }
 
 .fat-btn:active {
