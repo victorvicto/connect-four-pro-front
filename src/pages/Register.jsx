@@ -6,12 +6,34 @@ function Register() {
 
     const [errorMessage, setErrorMessage] = useState("");
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
 
 
-    function register(event){
+    async function register(event) {
         event.preventDefault();
-        setErrorMessage(`The name you entered was: ${username}`);
-    }
+    
+        try {
+          const response = await fetch('/api/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password }) //TODO finish this!
+          });
+    
+          if (response.ok) {
+            const { token } = await response.json();
+            localStorage.setItem('jwt', token);
+            navigate('/dashboard'); // Redirect to the dashboard page after successful login
+          } else {
+            const { error } = await response.json();
+            setErrorMessage(error);
+          }
+        } catch (error) {
+          console.error('Error occurred during login:', error);
+          setErrorMessage('Sorry, an unexpected error occured during login.');
+        }
+      }
   
     return (
       <div id="login-page" className='centering-page'>
@@ -19,10 +41,34 @@ function Register() {
           <form onSubmit={register}>
             <h2>Create Account</h2>
             {errorMessage.length>0 && <ErrorPannel errorMessage={errorMessage}/>}
-            <input type="email" placeholder="Email" name="email" required />
-            <input type="text" placeholder="Username" name="username" onChange={(e) => {setUsername(e.target.value)}} required />
-            <input type="password" placeholder="Password" name="password" required />
-            <input type="password" placeholder="Confirm Password" name="passwordconf" required />
+            <input 
+                type="email"
+                value={email}
+                placeholder="Email"
+                name="email"
+                onChange={(e) => {setEmail(e.target.value)}}
+                required
+            />
+            <input
+                type="text"
+                value={username}
+                placeholder="Username"
+                name="username"
+                onChange={(e) => {setUsername(e.target.value)}}
+                required
+            />
+            <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                required
+            />
+            <input 
+                type="password"
+                placeholder="Confirm Password"
+                name="passwordconf"
+                required
+            />
             <button type="submit" className='fat-btn'>
                 <div className="fat-btn-top">
                     Register
