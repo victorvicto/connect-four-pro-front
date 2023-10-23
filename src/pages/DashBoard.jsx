@@ -5,6 +5,7 @@ import Loading from '../components/Loading.jsx';
 function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState({username: "guest player"});
 
   useEffect(() => {
     // Check user login status using JWT
@@ -21,6 +22,7 @@ function Dashboard() {
 
         if (response.ok) {
           setIsLoggedIn(true);
+          setUserInfo(response.user_info);
         } else {
           setIsLoggedIn(false);
         }
@@ -42,11 +44,9 @@ function Dashboard() {
     return <Navigate to="/login" />; // Redirect to the login page if the user is not logged in
   }
 
-  const player_name = "guest player";
-
   return (
     <div className="centering-page">
-      <h1>Welcome {player_name}!</h1>
+      <h1>Welcome {userInfo.username}!</h1>
     </div>
   );
 }
