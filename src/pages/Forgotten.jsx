@@ -22,11 +22,7 @@ function Forgotten() {
             <p>Please provide your user email. We will provide you with a link to restet your password.</p>
             <input type="email" placeholder="Email" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} required />
             <br/>
-            <button type="submit" className='fat-btn'>
-                <div className="fat-btn-top">
-                    Send email
-                </div>
-            </button>   
+            <FatButton label="Send email" isSubmit/>
             <FatButton label="Cancel" path="/login"/>
           </form>
         </div>
