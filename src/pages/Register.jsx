@@ -69,11 +69,7 @@ function Register() {
                 name="passwordconf"
                 required
             />
-            <button type="submit" className='fat-btn'>
-                <div className="fat-btn-top">
-                    Register
-                </div>
-            </button>   
+            <FatButton label="Register" isSubmit/>   
             <FatButton label="Cancel" path="/"/>   
           </form>
         </div>

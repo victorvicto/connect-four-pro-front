@@ -60,10 +60,8 @@ function Login() {
           <input id="remember" type="checkbox" name="remember" />
           <label>Remember me</label>
           <br />
-          <button type="submit" className="fat-btn">
-            <div className="fat-btn-top">Login</div>
-          </button>
-          <FatButton label="Cancel" path="/" />
+          <FatButton label="Login" isSubmit/>
+          <FatButton label="Cancel" path="/"/>
           Forgot <Link to="/forgotten-password">password?</Link>
           <br />
           No account yet? <Link to="/register">&#10140; Create an account!</Link>
