@@ -1,12 +1,10 @@
-require('dotenv').config()
-
 const express = require('express');
+require('dotenv').config();
 var passport = require('passport');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.ATLAS_KEY, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const path = require('path');
 const app = express();
 const port = 3000;
 
