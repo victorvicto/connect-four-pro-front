@@ -18,6 +18,10 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// Initialize Passport and session management
+app.use(passport.initialize());
+app.use(passport.session());
+
 var authRouter = require('./routes/auth');
 var userRouter = require('./routes/user');
 
@@ -27,13 +31,13 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 
 app.get('/*', (req, res) => {
-  res.render('errors/404.ejs');
+    res.status(404).json({message: "Page not found"});
 })
 
 app.use((err, req, res, next) => {
-  res.render('errors/500.ejs', { errormessage: err });
+    res.status(500).json({message: err});
 });
 
 app.listen(port, () => {
-  console.log(`server running on port ${port}`);
+    console.log(`server running on port ${port}`);
 })
