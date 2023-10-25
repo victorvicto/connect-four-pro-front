@@ -20,7 +20,6 @@ var userRouter = require('./routes/user');
 
 // app.use(express.static(path.join(__dirname, 'public'))); // Not necessary yet
 
-app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 
