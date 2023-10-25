@@ -12,9 +12,9 @@ function Dashboard() {
     const checkLoginStatus = async () => {
       try {
         // Send a request to your Express API to verify the JWT
-        const response = await fetch('http://www.monsekfkdksizapi/wow', {
+        const response = await fetch('/user', {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('jwt')}` // Assuming the JWT is stored in localStorage
+            jwt: localStorage.getItem('jwt') // Assuming the JWT is stored in localStorage
           }
         });
 
@@ -22,7 +22,7 @@ function Dashboard() {
 
         if (response.ok) {
           setIsLoggedIn(true);
-          setUserInfo(response.user_info);
+          setUserInfo(response.userInfo);
         } else {
           setIsLoggedIn(false);
         }
