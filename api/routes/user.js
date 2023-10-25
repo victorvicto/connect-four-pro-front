@@ -2,8 +2,10 @@ var express = require('express');
 
 var router = express.Router();
 
-router.get('/', checkConnection, (req, res, next) => {
-  res.json({userInfo: req.session.user});
+router.use(checkConnection);
+
+router.get('/', (req, res, next) => {
+    res.json({userInfo: req.session.user});
 });
 
 function checkConnection(req, res, next){

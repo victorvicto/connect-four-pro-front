@@ -12,11 +12,7 @@ function Dashboard() {
     const checkLoginStatus = async () => {
       try {
         // Send a request to your Express API to verify the JWT
-        const response = await fetch('/user', {
-          headers: {
-            jwt: localStorage.getItem('jwt') // Assuming the JWT is stored in localStorage
-          }
-        });
+        const response = await fetch('/user');
 
         console.log(response);
 

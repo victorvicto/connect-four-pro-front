@@ -3,10 +3,16 @@ const passport = require('passport');
 
 var router = express.Router();
 
+var toy_user_database = {}
+
+function toy_authenticate(req, res, next){
+
+}
+
 router.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }),
+    passport.authenticate('local'),
     (req, res, next) => {
-        res.json({message: "authentication complete"}) // TODO generate and include token here
+        res.json({message: "authentication complete"}) // TODO generate and include jwt here
 });
 
 module.exports = router;
