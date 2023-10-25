@@ -17,16 +17,17 @@
     "express-session": "^1.17.3",
     "mongoose": "^7.6.3",
     "passport": "^0.6.0",
+    "passport-local-mongoose": "^8.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
-    "dotenv": "^16.3.1",
-    "nodemon": "^3.0.1",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
+    "dotenv": "^16.3.1",
+    "nodemon": "^3.0.1",
     "vite": "^4.2.0"
   }
 }
