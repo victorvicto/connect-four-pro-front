@@ -13,25 +13,25 @@ function Register() {
         event.preventDefault();
     
         try {
-          const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password }) //TODO finish this!
-          });
-    
-          if (response.ok) {
-            const { token } = await response.json();
-            localStorage.setItem('jwt', token);
-            navigate('/dashboard'); // Redirect to the dashboard page after successful login
-          } else {
-            const { error } = await response.json();
-            setErrorMessage(error);
-          }
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username, password: password }) //TODO finish this!
+            });
+        
+            if (response.ok) {
+                // const { token } = await response.json(); // We will set this up later
+                // localStorage.setItem('jwt', token);
+                navigate('/dashboard'); // Redirect to the dashboard page after successful login
+            } else {
+                const { error } = await response.json();
+                setErrorMessage(error.message);
+            }
         } catch (error) {
-          console.error('Error occurred during login:', error);
-          setErrorMessage('Sorry, an unexpected error occured during login.');
+            console.error('Error occurred during login:', error);
+            setErrorMessage('Sorry, an unexpected error occured during login.');
         }
       }
   

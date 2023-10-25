@@ -18,7 +18,8 @@ function Dashboard() {
 
         if (response.ok) {
           setIsLoggedIn(true);
-          setUserInfo(response.userInfo);
+          const res = response.json();
+          setUserInfo(res.userInfo);
         } else {
           setIsLoggedIn(false);
         }

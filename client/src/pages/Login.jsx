@@ -22,12 +22,12 @@ function Login() {
       });
 
       if (response.ok) {
-        const { token } = await response.json();
-        localStorage.setItem('jwt', token);
+        // const { token } = await response.json(); // We will set this up later
+        // localStorage.setItem('jwt', token);
         navigate('/dashboard'); // Redirect to the dashboard page after successful login
       } else {
         const { error } = await response.json();
-        setErrorMessage(error);
+        setErrorMessage(error.message);
       }
     } catch (error) {
       console.error('Error occurred during login:', error);

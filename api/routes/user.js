@@ -12,7 +12,7 @@ function checkConnection(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
-    res.status(403).json({"message":"User not authenticated", "redirect": "/login"});
+    res.status(414).json({message: "User not authenticated"});
 }
 
 module.exports = router;
