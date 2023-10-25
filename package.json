@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "api/app.js",
+  "main": "api/server.js",
   "scripts": {
-    "start": "node api/app.js",
-    "client": "cd client && vite",
-    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "startApi": "node api/server.js",
+    "devApi": "nodemon api/server.js",
+    "devClient": "cd client && vite",
+    "dev": "concurrently \"npm run devApi\" \"npm run devClient\"",
     "build": "cd client && vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
