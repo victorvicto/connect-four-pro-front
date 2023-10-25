@@ -15,18 +15,14 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
-var dashboardRouter = require('./routes/dashboard');
+var userRouter = require('./routes/user');
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public'))); // Not necessary yet
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
-app.use('/user', dashboardRouter);
+app.use('/user', userRouter);
 
 app.get('/*', (req, res) => {
   res.render('errors/404.ejs');
