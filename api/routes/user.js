@@ -9,9 +9,12 @@ router.get('/', (req, res, next) => {
 });
 
 function checkConnection(req, res, next){
+    console.log("checking connection for /user");
     if(req.isAuthenticated()){
+        console.log("auth success");
         return next();
     }
+    console.log("auth fail");
     res.status(414).json({message: "User not authenticated"});
 }
 
