@@ -15,7 +15,19 @@ var corsOptions = {
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
+// for testing purposes
+app.use((req, res, next) => {
+    console.log("A request has been made from: "+req.get('host'));
+    next();
+});
+
 app.use(cors(corsOptions));
+
+// for same testing purposes
+app.use((req, res, next) => {
+    console.log("the same request made from: "+req.get('host'));
+    next();
+});
 
 // requires the model with Passport-Local Mongoose plugged in
 const User = require('./models/users');
