@@ -4,18 +4,21 @@ var router = express.Router();
 
 router.use(checkConnection);
 
-router.get('/', (req, res, next) => {
-    res.json({userInfo: req.session.user});
+router.post('/', (req, res, next) => {
+    res.json({userInfo: req.session.passport.user});
 });
 
 function checkConnection(req, res, next){
     console.log("checking connection for /user");
-    if(req.isAuthenticated()){
+    console.log(req.session);
+    var wow = req.isAuthenticated();
+    console.log(wow);
+    if(wow){
         console.log("auth success");
         return next();
     }
     console.log("auth fail");
-    res.status(414).json({message: "User not authenticated"});
+    res.status(300).json({message: "User not authenticated"});
 }
 
 module.exports = router;

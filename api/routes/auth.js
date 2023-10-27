@@ -8,6 +8,7 @@ router.post('/login',
     passport.authenticate('local'),
     (req, res, next) => {
         console.log("accessing login");
+        console.log(req.session);
         res.json({message: "authentication complete"}); // TODO generate and include jwt here
 });
 
