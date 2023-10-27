@@ -1,4 +1,5 @@
 const express = require('express');
+var session = require('express-session');
 require('dotenv').config();
 var passport = require('passport');
 
@@ -17,6 +18,12 @@ passport.use(User.createStrategy());
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET_KEY,  // a secret string used to sign the session ID cookie
+    resave: false,  // don't save session if unmodified
+    saveUninitialized: false  // don't create session until something stored
+  }))
 
 // Initialize Passport and session management
 app.use(passport.initialize());
