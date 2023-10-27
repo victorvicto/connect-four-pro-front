@@ -14,8 +14,8 @@ router.post('/login',
 router.post('/register',
     (req, res, next) => {
         console.log("accessing register");
-        console.log(req);
         try{
+            console.log(req.body);
             User.register(new User({username: req.body.username}), req.body.password, (err) => {
                 console.log("inside user.register callback");
                 if (!err) {
@@ -24,7 +24,8 @@ router.post('/register',
                 }
                 console.log("error inside user.register callback:");
                 console.log(err);
-                res.status(300).json({message: "Registering aborted"});
+                // TODO: give a custom message depending on error type (user already exists,...)
+                res.status(300).json({message: "Unexpected error: Registering aborted"});
             });
         } catch(error){
             console.log("error happened while registering");

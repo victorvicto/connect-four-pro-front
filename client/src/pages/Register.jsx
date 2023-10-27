@@ -1,6 +1,7 @@
 import FatButton from '../components/FatButton.jsx';
 import ErrorPannel from '../components/ErrorPannel.jsx';
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
@@ -9,6 +10,7 @@ function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const navigate = useNavigate();
 
 
     async function register(event) {
@@ -28,8 +30,8 @@ function Register() {
                 // localStorage.setItem('jwt', token);
                 navigate('/dashboard'); // Redirect to the dashboard page after successful login
             } else {
-                const { error } = await response.json();
-                setErrorMessage(error.message);
+                var returnedError = await response.json();
+                setErrorMessage(returnedError.message);
             }
         } catch (error) {
             console.error('Error occurred during login:', error);
