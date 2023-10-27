@@ -14,16 +14,22 @@ router.post('/login',
 router.post('/register',
     (req, res, next) => {
         console.log("accessing register");
-        User.register(new User({username: req.body.username}), req.body.password, (err) => {
-            console.log("inside user.register callback");
-            if (!err) {
-                console.log("no error inside user.register callback");
-                return next();
-            }
-            console.log("error inside user.register callback:");
-            console.log(err);
+        try{
+            User.register(new User({username: req.body.username}), req.body.password, (err) => {
+                console.log("inside user.register callback");
+                if (!err) {
+                    console.log("no error inside user.register callback");
+                    return next();
+                }
+                console.log("error inside user.register callback:");
+                console.log(err);
+                res.status(300).json({message: "Registering aborted"});
+            });
+        } catch(error){
+            console.log("error happened while registering");
+            console.log(error);
             res.status(300).json({message: "Registering aborted"});
-        })
+        }
     },
     passport.authenticate('local'),
     (req, res, next) => {
