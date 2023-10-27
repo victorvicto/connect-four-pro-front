@@ -1,5 +1,6 @@
 const express = require('express');
 var session = require('express-session');
+const cors = require('cors');
 require('dotenv').config();
 var passport = require('passport');
 
@@ -8,6 +9,13 @@ mongoose.connect(process.env.ATLAS_KEY, { useNewUrlParser: true, useUnifiedTopol
 
 const app = express();
 const port = 3000;
+
+var corsOptions = {
+    origin: 'http://localhost:5173',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }
+
+app.use(cors(corsOptions));
 
 // requires the model with Passport-Local Mongoose plugged in
 const User = require('./models/users');
