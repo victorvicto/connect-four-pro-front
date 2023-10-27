@@ -7,6 +7,8 @@ function Register() {
     const [errorMessage, setErrorMessage] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
 
     async function register(event) {
@@ -59,14 +61,18 @@ function Register() {
             />
             <input
                 type="password"
+                value={password}
                 placeholder="Password"
                 name="password"
+                onChange={(e) => {setPassword(e.target.value)}}
                 required
             />
             <input 
                 type="password"
+                value={confirmPassword}
                 placeholder="Confirm Password"
                 name="passwordconf"
+                onChange={(e) => {setConfirmPassword(e.target.value)}}
                 required
             />
             <FatButton label="Register" isSubmit/>   
