@@ -4,8 +4,8 @@ var router = express.Router();
 
 router.use(checkConnection);
 
-router.post('/', (req, res, next) => {
-    res.json({userInfo: req.session.passport.user});
+router.get('/', (req, res, next) => {
+    res.json({userInfo: {username: req.session.passport.user}});
 });
 
 function checkConnection(req, res, next){

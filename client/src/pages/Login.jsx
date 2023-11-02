@@ -9,26 +9,29 @@ function Login() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
+    // TODO Check if already authenticated and redirect to dashboard if so
+
     async function login(event) {
         event.preventDefault();
 
         try {
             const response = await fetch('http://localhost:3000/auth/login', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: username, password: password })
-        });
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username, password: password }),
+                credentials: 'include'
+            });
 
-        if (response.ok) {
-            // const { token } = await response.json(); // We will set this up later
-            // localStorage.setItem('jwt', token);
-            navigate('/dashboard'); // Redirect to the dashboard page after successful login
-        } else {
-            var returnedError = await response.json();
-            setErrorMessage(returnedError.message);
-        }
+            if (response.ok) {
+                // const { token } = await response.json(); // We will set this up later
+                // localStorage.setItem('jwt', token);
+                navigate('/dashboard'); // Redirect to the dashboard page after successful login
+            } else {
+                var returnedError = await response.json();
+                setErrorMessage(returnedError.message);
+            }
         } catch (error) {
             console.error('Error occurred during login:', error);
             setErrorMessage('Sorry, an unexpected error occured during login.');

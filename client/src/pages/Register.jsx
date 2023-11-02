@@ -12,6 +12,7 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
 
+    // TODO Check if already authenticated and redirect to dashboard if so
 
     async function register(event) {
         event.preventDefault();
@@ -22,7 +23,8 @@ function Register() {
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: username, password: password }) //TODO finish this!
+                body: JSON.stringify({ username: username, password: password }), //TODO finish this!
+                credentials: 'include'
             });
         
             if (response.ok) {

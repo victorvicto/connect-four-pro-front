@@ -12,14 +12,15 @@ function Dashboard() {
         const checkLoginStatus = async () => {
             try {
                 // Send a request to your Express API to verify the JWT
-                const response = await fetch('http://localhost:3000/user');
-
-                console.log(response.json());
+                const response = await fetch('http://localhost:3000/user', {
+                    credentials: 'include'
+                });
 
                 if (response.ok) {
-                    setIsLoggedIn(true);
-                    const res = response.json();
+                    const res = await response.json();
+                    console.log(res.userInfo);
                     setUserInfo(res.userInfo);
+                    setIsLoggedIn(true);
                 } else {
                     setIsLoggedIn(false);
                 }
