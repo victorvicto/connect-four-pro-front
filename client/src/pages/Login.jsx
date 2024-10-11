@@ -27,10 +27,13 @@ function Login() {
             if (response.ok) {
                 // const { token } = await response.json(); // We will set this up later
                 // localStorage.setItem('jwt', token);
-                navigate('/dashboard'); // Redirect to the dashboard page after successful login
+                navigate('/dashboard/profile'); // Redirect to the dashboard page after successful login
             } else {
-                var returnedError = await response.json();
-                setErrorMessage(returnedError.message);
+                // var returnedError = await response.json();
+                // setErrorMessage(returnedError.message);
+                if(response.statusText == "Unauthorized"){
+                    setErrorMessage("Invalid email/username or password");
+                }
             }
         } catch (error) {
             console.error('Error occurred during login:', error);
@@ -49,7 +52,7 @@ function Login() {
                 value={username}
                 placeholder="Enter username or email"
                 name="username"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => {setErrorMessage("");setUsername(e.target.value)}}
                 required
             />
             <input
@@ -57,7 +60,7 @@ function Login() {
                 value={password}
                 placeholder="Enter password"
                 name="password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {setErrorMessage("");setPassword(e.target.value)}}
                 required
             />
             <input id="remember" type="checkbox" name="remember" />

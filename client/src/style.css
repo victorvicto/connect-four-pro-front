@@ -5,26 +5,34 @@ body{
     --main-grey: lightgrey;
     --main-dark: rgb(102, 102, 102);
     --main-bg-color: rgb(255, 206, 188);
+    --secondary-bg-color: rgb(218, 146, 113);
     --main-primary-color: rgb(65, 65, 134);
     --main-primary-color-dark: #225;
     --main-shadow: #2021;
     --main-font-color: var(--main-primary-color);
     --error-font-color: crimson;
     --main-font-weight: 600;
-    --main-font-size: 15pt;
+    --main-font-size: 15px;
     --main-font-family: Montserrat, sans-serif;
     --quick-transition-time: 0.1s;
-    --main-border-radius: 10pt;
-    --small-border-radius: 5pt;
+    --main-border-radius: 10px;
+    --small-border-radius: 5px;
+    --small-padding: 1em;
+    --medium-padding: 2em;
+    --large-padding: 3em;
     color: var(--main-font-color);
     font-weight: var(--main-font-weight);
     font-size: var(--main-font-size);
     min-height: 100vh;
     margin: 0pt;
     font-family: var(--main-font-family);
-    background: linear-gradient(315deg, rgba(255,194,162,1) 0%, rgba(255,223,196,1) 100%);
-    background-size: cover;
-    background-repeat: no-repeat;
+    /* background: url(/images/desert_bottom_right.png) right bottom no-repeat, linear-gradient(315deg, rgba(255,194,162,1) 0%, rgba(255,223,196,1) 100%) right no-repeat; */
+    background: linear-gradient(45deg, rgba(255,194,162,0) 0%, rgba(255,223,196,1) 100%) right, url(/images/desert_modified.png) center;
+    background-blend-mode: multiply, normal;
+    background-size: cover, cover;
+    /* background: linear-gradient(315deg, rgba(255,194,162,1) 0%, rgba(255,223,196,1) 100%) cover no-repeat, url(./public/images/desert_bottom_right.png) right bottom no-repeat; */
+    /* background-size: cover;
+    background-repeat: no-repeat; */
 }
 
 p {
@@ -70,7 +78,7 @@ a {
     border: var(--main-primary-color-dark) 3pt solid;
     display: block;
     padding: 0.5em;
-    font-size: 20pt;
+    font-size: 20px;
     font-weight: 800 !important;
     text-align: center;
     text-transform: uppercase;
@@ -93,7 +101,7 @@ a {
     cursor: pointer;
     border-radius: var(--main-border-radius);
     background-color: var(--main-primary-color-dark);
-    margin-bottom: 1em;
+    margin-bottom: var(--small-padding);
     margin-top: 5pt;
     box-shadow: 3pt 3pt var(--main-shadow);
     transition: var(--quick-transition-time);
@@ -183,4 +191,72 @@ h1 {
     font-weight: 600;
     margin: 0pt;
 }
-  
+
+.dashboard {
+    display: flex;
+    height: 100%;
+}
+
+.burger-btn {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    height: 20vw;
+    font-size: 10vw;
+    cursor: pointer;
+    z-index: 100;
+    background-color: transparent;
+    border: none;
+    color: var(--main-font-color);
+}
+
+.side-menu {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-shadow);
+    padding: var(--medium-padding);
+    box-sizing: border-box;
+    width: fit-content;
+    height: 100%;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    .side-menu {
+        background: linear-gradient(135deg, var(--main-primary-color) 0%, var(--main-primary-color-dark) 100%);
+        width: 80vw;
+        padding-top: 20vw;
+        position: absolute;
+        transition: 0.5s;
+    }
+    .collapsed-menu {
+        transform: translate(-100%, 0);
+    }
+    .burger-btn {
+        display: block;
+    }
+}
+
+.dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.light {
+    color: var(--main-white);
+}

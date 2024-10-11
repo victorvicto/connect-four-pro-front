@@ -30,7 +30,7 @@ function Register() {
             if (response.ok) {
                 // const { token } = await response.json(); // We will set this up later
                 // localStorage.setItem('jwt', token);
-                navigate('/dashboard'); // Redirect to the dashboard page after successful login
+                navigate('/dashboard/profile'); // Redirect to the dashboard page after successful login
             } else {
                 var returnedError = await response.json();
                 setErrorMessage(returnedError.message);
@@ -52,7 +52,7 @@ function Register() {
                 value={email}
                 placeholder="Email"
                 name="email"
-                onChange={(e) => {setEmail(e.target.value)}}
+                onChange={(e) => {setErrorMessage("");setEmail(e.target.value)}}
                 required
             />
             <input
@@ -60,7 +60,7 @@ function Register() {
                 value={username}
                 placeholder="Username"
                 name="username"
-                onChange={(e) => {setUsername(e.target.value)}}
+                onChange={(e) => {setErrorMessage("");setUsername(e.target.value)}}
                 required
             />
             <input
@@ -68,7 +68,7 @@ function Register() {
                 value={password}
                 placeholder="Password"
                 name="password"
-                onChange={(e) => {setPassword(e.target.value)}}
+                onChange={(e) => {setErrorMessage("");setPassword(e.target.value)}}
                 required
             />
             <input 
@@ -76,7 +76,7 @@ function Register() {
                 value={confirmPassword}
                 placeholder="Confirm Password"
                 name="passwordconf"
-                onChange={(e) => {setConfirmPassword(e.target.value)}}
+                onChange={(e) => {setErrorMessage("");setConfirmPassword(e.target.value)}}
                 required
             />
             <FatButton label="Register" isSubmit/>   
