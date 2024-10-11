@@ -20,6 +20,7 @@ body{
     --small-padding: 1em;
     --medium-padding: 2em;
     --large-padding: 3em;
+    --burger-btn-size: 20vw;
     color: var(--main-font-color);
     font-weight: var(--main-font-weight);
     font-size: var(--main-font-size);
@@ -202,8 +203,8 @@ h1 {
     position: absolute;
     top: 0;
     left: 0;
-    width: 20vw;
-    height: 20vw;
+    width: var(--burger-btn-size);
+    height: var(--burger-btn-size);
     font-size: 10vw;
     cursor: pointer;
     z-index: 100;
@@ -222,6 +223,12 @@ h1 {
     height: 100%;
 }
 
+.dashboard-top-bar {
+    display: none;
+    height: var(--burger-btn-size);
+    width: 100%;
+}
+
 @media (max-aspect-ratio: 1/1) {
     .side-menu {
         background: linear-gradient(135deg, var(--main-primary-color) 0%, var(--main-primary-color-dark) 100%);
@@ -234,6 +241,9 @@ h1 {
         transform: translate(-100%, 0);
     }
     .burger-btn {
+        display: block;
+    }
+    .dashboard-top-bar {
         display: block;
     }
 }

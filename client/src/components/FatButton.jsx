@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 
-function FatButton({ label, path="/", isSubmit=false }) {
+function FatButton({ label, path="/", isSubmit=false, additionalOnClick=()=>{} }) {
     
-    var button = (  <button className="fat-btn" type={isSubmit ? 'submit' : 'button'}>
+    var button = (  <button className="fat-btn" type={isSubmit ? 'submit' : 'button'} onClick={additionalOnClick}>
                         <div className="fat-btn-top">
                             {label}
                         </div>

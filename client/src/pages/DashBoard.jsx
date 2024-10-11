@@ -54,12 +54,13 @@ function Dashboard() {
                     {menuCollapsed?"☰":"✖"}
                 </button>
                 <div className={(menuCollapsed?"collapsed-menu ":"")+"side-menu"}>
-                    <FatButton label="Profile" path="/dashboard/profile"/>
-                    <FatButton label="Play Online" path="/dashboard/play-online"/>
-                    <FatButton label="Play Local" path="/dashboard/play-local"/>
-                    <FatButton label="Settings" path="/dashboard/settings"/>
+                    <FatButton label="Profile" path="/dashboard/profile" additionalOnClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Play Online" path="/dashboard/play-online" additionalOnClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Play Local" path="/dashboard/play-local" additionalOnClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Settings" path="/dashboard/settings" additionalOnClick={()=>setMenuCollapsed(true)}/>
                 </div>
                 <div className="dashboard-content">
+                    <div className="dashboard-top-bar"></div>
                     <Routes>
                         <Route path="profile" element={<Profile userInfo={userInfo} />} />
                         <Route path="play-online" element={<PlayOnline userInfo={userInfo} />} />
