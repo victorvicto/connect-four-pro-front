@@ -8,10 +8,6 @@ const User = new Schema({
         required: true,
         unique: true
     },
-    profilePicture: {
-        type: String,
-        default: 'default-profile.png'
-    },
     elo: {
         type: Number,
         default: 600
