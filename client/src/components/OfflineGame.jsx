@@ -82,7 +82,7 @@ const OfflineGame = ({ mode }) => {
             setWinner(newWinner);
         } else {
             setCurrentPlayer(currentPlayer === 'Red' ? 'Yellow' : 'Red');
-            if (mode === 'bot' && currentPlayer === 'Red') {
+            if (mode === 'bot' && currentPlayer === 'Yellow') {
                 const botCol = getBotMove(newBoard);
                 handleClick(botCol);
             }
