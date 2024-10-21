@@ -3,26 +3,26 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:4000'); // Replace with your server URL
+//const socket = io('http://localhost:4000'); // Replace with your server URL
 
 const Game = () => {
     const [board, setBoard] = useState(Array(6).fill(Array(7).fill(null)));
     const [currentPlayer, setCurrentPlayer] = useState('R');
     const [winner, setWinner] = useState(null);
 
-    useEffect(() => {
-        // Listen for board updates from the server
-        socket.on('boardUpdate', (newBoard) => {
-            setBoard(newBoard.board);
-            setCurrentPlayer(newBoard.currentPlayer);
-            setWinner(newBoard.winner);
-        });
+    // useEffect(() => {
+    //     // Listen for board updates from the server
+    //     socket.on('boardUpdate', (newBoard) => {
+    //         setBoard(newBoard.board);
+    //         setCurrentPlayer(newBoard.currentPlayer);
+    //         setWinner(newBoard.winner);
+    //     });
 
-        // Clean up the socket connection on component unmount
-        return () => {
-            socket.off('boardUpdate');
-        };
-    }, []);
+    //     // Clean up the socket connection on component unmount
+    //     return () => {
+    //         socket.off('boardUpdate');
+    //     };
+    // }, []);
 
     const handleClick = (col) => {
         if (winner) return;
