@@ -80,7 +80,7 @@ function Register() {
                 required
             />
             <FatButton label="Register" isSubmit/>   
-            <FatButton label="Cancel" path="/"/>   
+            <FatButton label="Cancel" linkTo="/"/>
           </form>
         </div>
       </div>

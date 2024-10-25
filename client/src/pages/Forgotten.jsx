@@ -23,7 +23,7 @@ function Forgotten() {
             <input type="email" placeholder="Email" name="email" value={email} onChange={(e)=>{setErrorMessage("");setEmail(e.target.value)}} required />
             <br/>
             <FatButton label="Send email" isSubmit/>
-            <FatButton label="Cancel" path="/login"/>
+            <FatButton label="Cancel" linkTo="/login"/>
           </form>
         </div>
       </div>

@@ -54,10 +54,10 @@ function Dashboard() {
                     {menuCollapsed?"☰":"✖"}
                 </button>
                 <div className={(menuCollapsed?"collapsed-menu ":"")+"side-menu"}>
-                    <FatButton label="Profile" path="/dashboard/profile" additionalOnClick={()=>setMenuCollapsed(true)}/>
-                    <FatButton label="Play Online" path="/dashboard/play-online" additionalOnClick={()=>setMenuCollapsed(true)}/>
-                    <FatButton label="Play Local" path="/dashboard/play-local" additionalOnClick={()=>setMenuCollapsed(true)}/>
-                    <FatButton label="Settings" path="/dashboard/settings" additionalOnClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Profile" linkTo="/dashboard/profile" onClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Play Online" linkTo="/dashboard/play-online" onClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Play Local" linkTo="/dashboard/play-local" onClick={()=>setMenuCollapsed(true)}/>
+                    <FatButton label="Settings" linkTo="/dashboard/settings" onClick={()=>setMenuCollapsed(true)}/>
                 </div>
                 <div className="dashboard-content">
                     <div className="dashboard-top-bar"></div>

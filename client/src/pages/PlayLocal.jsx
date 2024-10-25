@@ -1,24 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
 import OfflineGame from '../components/OfflineGame';
+import FatButton from '../components/FatButton';
+import OfflinePlayer from '../utils/OfflinePlayer';
+import { RandomBot, BalancedBot } from '../utils/bots';
 
 function PlayLocal() {
-    const [mode, setMode] = useState('pvp');
-    return (
+    const [opponent, setOpponent] = useState(null);
+
+    const content = opponent ? (
+        <OfflineGame opponent={opponent} />
+    ) : (
         <>
-            <div>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={mode === 'bot'}
-                        onChange={() => setMode(mode === 'pvp' ? 'bot' : 'pvp')}
-                    />
-                    {mode === 'pvp' ? 'Pass and Play' : 'Play with Bot'}
-                </label>
-                <OfflineGame mode={mode} />
-            </div>
+            <FatButton label="Pass and Play" onClick={() => setOpponent(new OfflinePlayer("Player 2", 'p2'))} />
+            <FatButton label="Tim (Bot)" onClick={() => setOpponent(new RandomBot("Tim", 'p2'))} />
+            <FatButton label="Charlotte (Bot)" onClick={() => setOpponent(new BalancedBot("Charlotte", 'p2'))} />
         </>
     );
+
+    return content;
 };
 
 export default PlayLocal;

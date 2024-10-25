@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-
-const ROWS = 6;
-const COLS = 7;
+import { checkWinner, ROWS, COLS } from '../utils/game';
 
 const createBoard = () => {
     const board = [];
@@ -11,63 +9,32 @@ const createBoard = () => {
     return board;
 };
 
-const checkWinner = (board) => {
-    const checkDirection = (row, col, rowDir, colDir) => {
-        const player = board[row][col];
-        if (!player) return null;
-
-        for (let i = 1; i < 4; i++) {
-            const newRow = row + rowDir * i;
-            const newCol = col + colDir * i;
-            if (
-                newRow < 0 || newRow >= ROWS ||
-                newCol < 0 || newCol >= COLS ||
-                board[newRow][newCol] !== player
-            ) {
-                return false;
-            }
-        }
-        return true;
-    };
-
-    for (let row = 0; row < ROWS; row++) {
-        for (let col = 0; col < COLS; col++) {
-            if (board[row][col]) {
-                if (
-                    checkDirection(row, col, 0, 1) || // Horizontal
-                    checkDirection(row, col, 1, 0) || // Vertical
-                    checkDirection(row, col, 1, 1) || // Diagonal down-right
-                    checkDirection(row, col, 1, -1)   // Diagonal down-left
-                ) {
-                    return board[row][col];
-                }
-            }
-        }
-    }
-    return null;
-};
-
-const getBotMove = (board) => {
-    // Implement simple bot logic to choose a column
-    // Return the column index
-    const availableCols = [];
-    for (let col = 0; col < COLS; col++) {
-        if (board[0][col] === null) {
-            availableCols.push(col);
-        }
-    }
-    const randomIndex = Math.floor(Math.random() * availableCols.length);
-    return availableCols[randomIndex];
-};
-
-const OfflineGame = ({ mode }) => {
+const OfflineGame = ({ opponent }) => {
+    const userRole = opponent.role === 'p1' ? 'p2' : 'p1';
     const [board, setBoard] = useState(createBoard());
-    const [currentPlayer, setCurrentPlayer] = useState('Red');
+    const [currentPlayer, setCurrentPlayer] = useState('p1');
     const [winner, setWinner] = useState(null);
+
+    React.useEffect(() => {
+        if (currentPlayer === opponent.role && !winner) {
+            console.log(opponent);
+            const move = opponent.pickMove(board);
+            console.log(move);
+            move.then(col => playMove(col));
+        }
+    }, [board, currentPlayer, winner]);
 
     const handleClick = (col) => {
         if (winner) return;
 
+        if (currentPlayer === userRole){
+            playMove(col);
+        } else if (opponent.handleClick) {
+            opponent.handleClick(col);
+        }
+    };
+
+    function playMove(col) {
         const newBoard = board.map(row => row.slice());
         for (let row = ROWS - 1; row >= 0; row--) {
             if (!newBoard[row][col]) {
@@ -75,19 +42,14 @@ const OfflineGame = ({ mode }) => {
                 break;
             }
         }
-
         setBoard(newBoard);
-        const newWinner = checkWinner(newBoard);
-        if (newWinner) {
-            setWinner(newWinner);
+        const gameWinner = checkWinner(newBoard);
+        if (gameWinner) {
+            setWinner(gameWinner);
         } else {
-            setCurrentPlayer(currentPlayer === 'Red' ? 'Yellow' : 'Red');
-            if (mode === 'bot' && currentPlayer === 'Yellow') {
-                const botCol = getBotMove(newBoard);
-                handleClick(botCol);
-            }
+            setCurrentPlayer(currentPlayer === 'p1' ? 'p2' : 'p1');
         }
-    };
+    }
 
     return (
         <div>

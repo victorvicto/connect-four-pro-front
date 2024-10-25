@@ -67,7 +67,7 @@ function Login() {
             <label>Remember me</label>
             <br />
             <FatButton label="Login" isSubmit/>
-            <FatButton label="Cancel" path="/"/>
+            <FatButton label="Cancel" linkTo="/"/>
             Forgot <Link to="/forgotten-password">password?</Link>
             <br />
             No account yet? <Link to="/register">&#10140; Create an account!</Link>
