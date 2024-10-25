@@ -15,7 +15,7 @@ class Bot extends Player {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve(this.thinkOfMove(board));
-            }, getThinkingTime());
+            }, this.getThinkingTime());
         });
     }
 }
