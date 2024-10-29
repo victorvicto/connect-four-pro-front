@@ -11,29 +11,31 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Forgotten from './pages/Forgotten'
 import DashBoard from './pages/DashBoard'
+import AuthRoute from './utils/AuthRoute';
+import NoAuthRoute from './utils/NoAuthRoute';
 import './style.css'
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Welcome />,
+        element: <NoAuthRoute><Welcome /></NoAuthRoute>,
         errorElement: <ErrorPage />
     },
     {
         path: "/dashboard/*",
-        element: <DashBoard />,
+        element: <AuthRoute><DashBoard /></AuthRoute>
     },
     {
         path: "/login",
-        element: <Login />
+        element: <NoAuthRoute><Login /></NoAuthRoute>
     },
     {
         path: "/register",
-        element: <Register />
+        element: <NoAuthRoute><Register /></NoAuthRoute>
     },
     {
         path: "/forgotten-password",
-        element: <Forgotten />
+        element: <NoAuthRoute><Forgotten /></NoAuthRoute>
     }
 ]);
 

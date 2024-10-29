@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { checkWinner, ROWS, COLS } from '../utils/game';
+import { checkWinner, isDraw, ROWS, COLS } from '../utils/game';
 
 const createBoard = () => {
     const board = [];
@@ -14,6 +14,7 @@ const OfflineGame = ({ opponent }) => {
     const [board, setBoard] = useState(createBoard());
     const [currentPlayer, setCurrentPlayer] = useState('p1');
     const [winner, setWinner] = useState(null);
+    const [draw, setDraw] = useState(false);
 
     React.useEffect(() => {
         const makeMove = async () => {
@@ -50,6 +51,8 @@ const OfflineGame = ({ opponent }) => {
         const gameWinner = checkWinner(newBoard);
         if (gameWinner) {
             setWinner(gameWinner);
+        } else if (isDraw(newBoard)) {
+            setDraw(true);
         } else {
             setCurrentPlayer(currentPlayer === 'p1' ? 'p2' : 'p1');
         }
@@ -85,6 +88,33 @@ const OfflineGame = ({ opponent }) => {
                     flexDirection: 'column',
                 }}>
                     <h2 style={{ color: 'white' }}>{winner} wins!</h2>
+                    <button onClick={() => {
+                        setBoard(createBoard());
+                        setCurrentPlayer('p1');
+                        setWinner(null);
+                    }} style={{
+                        padding: '10px 20px',
+                        fontSize: '16px',
+                        cursor: 'pointer',
+                    }}>
+                        Restart Game
+                    </button>
+                </div>
+            )}
+            {draw && (
+                <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                }}>
+                    <h2 style={{ color: 'white' }}>Draw!</h2>
                     <button onClick={() => {
                         setBoard(createBoard());
                         setCurrentPlayer('p1');

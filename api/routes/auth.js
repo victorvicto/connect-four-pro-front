@@ -3,6 +3,14 @@ const passport = require('passport');
 const User = require('../models/users');
 
 var router = express.Router();
+router.post('/logout', (req, res) => {
+    req.logout((err) => {
+        if (err) {
+            return res.status(500).json({message: "Logout failed"});
+        }
+        res.json({message: "Successfully logged out"});
+    });
+});
 
 router.post('/login',
     passport.authenticate('local'),

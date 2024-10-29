@@ -59,4 +59,8 @@ function checkWinner(board){
     return null;
 };
 
-export { COLS, ROWS, checkWinner, getValidMoves, isWinningMove };
+function isDraw(board) {
+    return board[0].every(cell => cell !== null);
+}
+
+export { COLS, ROWS, checkWinner, getValidMoves, isWinningMove, isDraw };
