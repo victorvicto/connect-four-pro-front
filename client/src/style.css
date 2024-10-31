@@ -283,7 +283,8 @@ h1 {
     flex-direction: column;
     gap: 5px;
     width: 100%;
-    max-width: 500px;
+    aspect-ratio: 6/7;
+    max-height: 100vh;
 }
 
 .game-row {

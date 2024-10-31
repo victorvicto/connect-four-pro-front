@@ -8,8 +8,34 @@ import PlayLocal from './PlayLocal';
 import Settings from './Settings';
 
 function Dashboard() {
-    const [userInfo, setUserInfo] = useState({username: "guest player"});
+    const [userInfo, setUserInfo] = useState(null);
     const [menuCollapsed, setMenuCollapsed] = useState(true);
+
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/user', {
+                    credentials: 'include'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('User info:', data);
+                    setUserInfo(data.userInfo);
+                } else {
+                    console.error('Error fetching user info:', response);
+                }
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+            }
+        };
+
+        fetchUserInfo();
+    }, []);
+
+    if (!userInfo) {  
+        return <Loading />;
+    }
 
     return (
             <div className="dashboard">
