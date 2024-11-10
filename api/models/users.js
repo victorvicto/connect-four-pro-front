@@ -11,7 +11,11 @@ const User = new Schema({
     elo: {
         type: Number,
         default: 600
-    }
+    },
+    games: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Game'
+    }]
 });
 
 User.plugin(passportLocalMongoose);

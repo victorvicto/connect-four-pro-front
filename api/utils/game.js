@@ -48,7 +48,6 @@ function getValidMoves(board) {
 }
 
 function isWinningMove(board, col, player) {
-    // Implement logic to check if placing a piece in the column `col` results in a win for `player`
     const tempBoard = board.map(row => row.slice());
     for (let row = tempBoard.length - 1; row >= 0; row--) {
         if (tempBoard[row][col] === null) {

@@ -7,7 +7,7 @@ const User = require('../models/users');
 router.use(checkConnection);
 
 router.get('/', (req, res, next) => {
-    res.json({userInfo: {username: req.session.passport.user}});
+    res.json({userInfo: req.user});
 });
 
 function checkConnection(req, res, next){

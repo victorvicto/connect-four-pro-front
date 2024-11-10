@@ -25,7 +25,7 @@ router.post('/register',
         console.log("accessing register");
         try{
             console.log(req.body);
-            User.register(new User({username: req.body.username}), req.body.password, (err) => {
+            User.register(new User({username: req.body.username, email: req.body.email}), req.body.password, (err) => {
                 console.log("inside user.register callback");
                 if (!err) {
                     console.log("no error inside user.register callback");

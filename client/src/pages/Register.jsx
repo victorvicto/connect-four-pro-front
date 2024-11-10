@@ -23,7 +23,7 @@ function Register() {
                 headers: {
                 'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ username: username, password: password }), //TODO finish this!
+                body: JSON.stringify({ username: username, email: email, password: password }), //TODO finish this!
                 credentials: 'include'
             });
         
