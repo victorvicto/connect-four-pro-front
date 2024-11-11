@@ -39,6 +39,7 @@ const OfflineGame = ({ opponent }) => {
         }
     };
 
+    // TODO: move this function in a more sensible file and make sure to use the player object code instead of the hardcoded values p1 and p2
     function playMove(col) {
         const newBoard = board.map(row => row.slice());
         for (let row = ROWS - 1; row >= 0; row--) {

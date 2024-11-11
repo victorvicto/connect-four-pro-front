@@ -1,7 +1,8 @@
 const ROWS = 6;
 const COLS = 7;
+const BOARDSPLITTING = 3;
 
-function boardToTrinaryString(board) {
+function boardToIntState(board) {
     let trinary = '';
     for (let row of board) {
         for (let cell of row) {
@@ -14,20 +15,33 @@ function boardToTrinaryString(board) {
             }
         }
     }
-    return trinary;
+    let chunkSize = trinary.length / BOARDSPLITTING;
+    let intState = [];
+    for (let i = 0; i < BOARDSPLITTING; i++) {
+        intState += parseInt(trinary.slice(i*chunkSize, (i+1)*chunkSize), 3);
+    }
+    return intState;
 }
 
-function trinaryStringToBoard(str) {
+function intStateToBoard(intState) {
+    let trinary = '';
+    for (let i = 0; i < BOARDSPLITTING; i++) {
+        let trinaryChunk = intState[i].toString(3);
+        trinaryChunk = '0'.repeat(ROWS*COLS/BOARDSPLITTING - trinaryChunk.length) + trinaryChunk;
+        trinary += trinaryChunk;
+    }
     const board = [];
     for (let i = 0; i < ROWS; i++) {
         const row = [];
         for (let j = 0; j < COLS; j++) {
-            const char = str[i * COLS + j];
+            const char = trinary[i * COLS + j];
             if (char === '0') {
                 row.push(null);
-            } else if (char === '1') {
+            }
+            else if (char === '1') {
                 row.push('player1');
-            } else if (char === '2') {
+            }
+            else if (char === '2') {
                 row.push('player2');
             }
         }
@@ -48,6 +62,7 @@ function getValidMoves(board) {
 }
 
 function isWinningMove(board, col, player) {
+    // Implement logic to check if placing a piece in the column `col` results in a win for `player`
     const tempBoard = board.map(row => row.slice());
     for (let row = tempBoard.length - 1; row >= 0; row--) {
         if (tempBoard[row][col] === null) {
@@ -98,4 +113,4 @@ function isDraw(board) {
     return board[0].every(cell => cell !== null);
 }
 
-export { COLS, ROWS, boardToTrinaryString, trinaryStringToBoard, checkWinner, getValidMoves, isWinningMove, isDraw };
+export { COLS, ROWS, boardToIntState, intStateToBoard, checkWinner, getValidMoves, isWinningMove, isDraw };
