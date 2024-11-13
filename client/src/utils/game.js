@@ -50,6 +50,24 @@ function intStateToBoard(intState) {
     return board;
 }
 
+function playMove(col, board,) {
+    const newBoard = board.map(row => row.slice());
+    for (let row = ROWS - 1; row >= 0; row--) {
+        if (!newBoard[row][col]) {
+            newBoard[row][col] = currentPlayer;
+            break;
+        }
+    }
+    setBoard(newBoard);
+    const gameWinner = checkWinner(newBoard);
+    if (gameWinner) {
+        setWinner(gameWinner);
+    } else if (isDraw(newBoard)) {
+        setDraw(true);
+    } else {
+        setCurrentPlayer(currentPlayer === 'p1' ? 'p2' : 'p1');
+    }
+}
 
 function getValidMoves(board) {
     const validMoves = [];
