@@ -39,26 +39,6 @@ const OfflineGame = ({ opponent }) => {
         }
     };
 
-    // TODO: move this function in a more sensible file and make sure to use the player object code instead of the hardcoded values p1 and p2
-    function playMove(col) {
-        const newBoard = board.map(row => row.slice());
-        for (let row = ROWS - 1; row >= 0; row--) {
-            if (!newBoard[row][col]) {
-                newBoard[row][col] = currentPlayer;
-                break;
-            }
-        }
-        setBoard(newBoard);
-        const gameWinner = checkWinner(newBoard);
-        if (gameWinner) {
-            setWinner(gameWinner);
-        } else if (isDraw(newBoard)) {
-            setDraw(true);
-        } else {
-            setCurrentPlayer(currentPlayer === 'p1' ? 'p2' : 'p1');
-        }
-    }
-
     return (
         <div className='game-board'>
             {board.map((row, rowIndex) => (
