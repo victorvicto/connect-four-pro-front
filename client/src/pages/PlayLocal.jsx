@@ -5,11 +5,11 @@ import FatButton from '../components/FatButton';
 import OfflinePlayer from '../utils/OfflinePlayer';
 import { RandomBot, BalancedBot } from '../utils/bots';
 
-function PlayLocal() {
+function PlayLocal({userInfo}) {
     const [opponent, setOpponent] = useState(null);
 
     const content = opponent ? (
-        <OfflineGame opponent={opponent} />
+        <OfflineGame opponent={opponent} userChipsStyle={userInfo.chipsStyle} />
     ) : (
         <div>
             <FatButton label="Pass and Play" onClick={() => setOpponent(new OfflinePlayer("Player 2"))} />

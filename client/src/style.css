@@ -296,5 +296,6 @@ h1 {
     flex-grow: 1;
     aspect-ratio: 1/1;
     border-radius: 50%;
+    width: 100%;
     background-color: var(--main-shadow);
 }

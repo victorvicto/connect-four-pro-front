@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Board from '../utils/Board';
 
-const OfflineGame = ({ opponent }) => {
+const OfflineGame = ({ opponent, userChipsStyle }) => {
     const userRole = opponent.opponentRole;
     const [boardState, setBoardState] = useState(new Board());
     const [winner, setWinner] = useState(null);
@@ -25,7 +25,7 @@ const OfflineGame = ({ opponent }) => {
             const newDraw = boardState.isDraw();
             setWinner(newWinner);
             setDraw(newDraw);
-            setBoardState(new Board(board=boardState.getBoard(), currentPlayer=boardState.currentPlayer));
+            setBoardState(new Board(boardState.getBoard(), boardState.currentPlayer));
         }
     };
 
@@ -39,15 +39,20 @@ const OfflineGame = ({ opponent }) => {
         <div className="game-board">
             {boardState.getBoard().map((row, rowIndex) => (
                 <div key={rowIndex} className="game-row">
-                    {row.map((cell, colIndex) => (
-                        <div
-                            key={colIndex}
-                            className={`token ${cell}`}
-                            onClick={() => handleClick(colIndex)}
-                        >
-                            {cell}
-                        </div>
-                    ))}
+                    {row.map((cell, colIndex) => {
+                        if (cell === null) {
+                            return <div key={colIndex} className={`token`} onClick={() => handleClick(colIndex)} />;
+                        } else {
+                            return (
+                                <img
+                                    key={colIndex}
+                                    className={`token`}
+                                    onClick={() => handleClick(colIndex)}
+                                    src={"/images/chips/"+(cell === userRole ? userChipsStyle : opponent.chipsStyle)+"_"+cell+".png"}
+                                />
+                            );
+                        }
+                    })}
                 </div>
             ))}
             {winner && <div className="error-pannel">Winner: {winner}</div>}

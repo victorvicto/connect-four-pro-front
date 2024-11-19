@@ -15,7 +15,11 @@ const User = new Schema({
     games: [{
         type: Schema.Types.ObjectId,
         ref: 'Game'
-    }]
+    }],
+    chipsStyle: {
+        type: String,
+        default: "default"
+    }
 });
 
 User.plugin(passportLocalMongoose);

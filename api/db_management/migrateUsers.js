@@ -18,6 +18,11 @@ async function migrateUsers() {
                 await user.save();
                 console.log(`Updated user ${user._id}`);
             }
+            if (user.chipsStyle === undefined) {
+                user.chipsStyle = 'default';
+                await user.save();
+                console.log(`Updated user ${user._id}`);
+            }
         }
         console.log('Migration completed');
     } catch (error) {
