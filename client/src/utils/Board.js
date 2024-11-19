@@ -1,9 +1,13 @@
 class Board {
-    constructor(rows = 6, cols = 7) {
+    constructor(board = null, currentPlayer = 'p1', rows = 6, cols = 7) {
         this.rows = rows;
         this.cols = cols;
-        this.board = this.createBoard();
-        this.currentPlayer = 'p1';
+        if (board === null){
+            this.board = this.createBoard();
+        } else {
+            this.board = board;
+        }
+        this.currentPlayer = currentPlayer;
     }
 
     createBoard() {
@@ -19,6 +23,7 @@ class Board {
     }
 
     playMove(col) {
+        if(col < 0 || col >= this.cols) return false;
         for (let row = this.rows - 1; row >= 0; row--) {
             if (!this.board[row][col]) {
                 this.board[row][col] = this.currentPlayer;
@@ -94,21 +99,69 @@ class Board {
         return this.checkWinner(tempBoard) === player;
     }
     
-    boardToString() {
-        return this.board.map(row => row.map(cell => {
-            if (cell === null) return '.';
-            if (cell === 'p1') return '1';
-            if (cell === 'p2') return '2';
-        }).join('')).join('\n');
+    // boardToString() {
+    //     return this.board.map(row => row.map(cell => {
+    //         if (cell === null) return '.';
+    //         if (cell === 'p1') return '1';
+    //         if (cell === 'p2') return '2';
+    //     }).join('')).join('\n');
+    // }
+    
+    // stringToBoard(boardString) {
+    //     const rows = boardString.split('\n');
+    //     this.board = rows.map(row => row.split('').map(cell => {
+    //         if (cell === '.') return null;
+    //         if (cell === '1') return 'p1';
+    //         if (cell === '2') return 'p2';
+    //     }));
+    // }
+
+    boardToIntState() {
+        let trinary = '';
+        for (let row of board) {
+            for (let cell of row) {
+                if (cell === null) {
+                    trinary += '0';
+                } else if (cell === 'player1') {
+                    trinary += '1';
+                } else if (cell === 'player2') {
+                    trinary += '2';
+                }
+            }
+        }
+        let chunkSize = trinary.length / BOARDSPLITTING;
+        let intState = [];
+        for (let i = 0; i < BOARDSPLITTING; i++) {
+            intState.push(parseInt(trinary.slice(i*chunkSize, (i+1)*chunkSize), 3));
+        }
+        return intState;
     }
     
-    stringToBoard(boardString) {
-        const rows = boardString.split('\n');
-        this.board = rows.map(row => row.split('').map(cell => {
-            if (cell === '.') return null;
-            if (cell === '1') return 'p1';
-            if (cell === '2') return 'p2';
-        }));
+    intStateToBoard(intState) {
+        let trinary = '';
+        for (let i = 0; i < BOARDSPLITTING; i++) {
+            let trinaryChunk = intState[i].toString(3);
+            trinaryChunk = '0'.repeat(ROWS*COLS/BOARDSPLITTING - trinaryChunk.length) + trinaryChunk;
+            trinary += trinaryChunk;
+        }
+        const board = [];
+        for (let i = 0; i < ROWS; i++) {
+            const row = [];
+            for (let j = 0; j < COLS; j++) {
+                const char = trinary[i * COLS + j];
+                if (char === '0') {
+                    row.push(null);
+                }
+                else if (char === '1') {
+                    row.push('player1');
+                }
+                else if (char === '2') {
+                    row.push('player2');
+                }
+            }
+            board.push(row);
+        }
+        return board;
     }
 }
 

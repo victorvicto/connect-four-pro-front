@@ -1,114 +1,57 @@
-import React, { useState } from 'react';
-import { checkWinner, isDraw, ROWS, COLS } from '../utils/game';
-
-const createBoard = () => {
-    const board = [];
-    for (let i = 0; i < ROWS; i++) {
-        board.push(Array(COLS).fill(null));
-    }
-    return board;
-};
+import React, { useState, useEffect } from 'react';
+import Board from '../utils/Board';
 
 const OfflineGame = ({ opponent }) => {
     const userRole = opponent.opponentRole;
-    const [board, setBoard] = useState(createBoard());
-    const [currentPlayer, setCurrentPlayer] = useState('p1');
+    const [boardState, setBoardState] = useState(new Board());
     const [winner, setWinner] = useState(null);
     const [draw, setDraw] = useState(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const makeMove = async () => {
-            if (currentPlayer === opponent.role && !winner) {
+            if (boardState.currentPlayer === opponent.role && !winner && !draw) {
                 console.log('Waiting for opponent to make a move...');
-                const move = await opponent.pickMove(board);
+                const move = await opponent.pickMove(boardState);
                 console.log('Opponent move:', move);
                 playMove(move);
             }
         };
         makeMove();
-    }, [board, currentPlayer, opponent, winner]);
+    }, [boardState, opponent, winner, draw]);
+
+    const playMove = (col) => {
+        if (boardState.playMove(col)) {
+            const newWinner = boardState.checkWinner();
+            const newDraw = boardState.isDraw();
+            setWinner(newWinner);
+            setDraw(newDraw);
+            setBoardState(new Board(board=boardState.getBoard(), currentPlayer=boardState.currentPlayer));
+        }
+    };
 
     const handleClick = (col) => {
-        if (winner) return;
-
-        if (currentPlayer === userRole){
+        if (!winner && !draw && boardState.currentPlayer === userRole) {
             playMove(col);
-        } else if (opponent.handleClick) {
-            console.log(col);
-            opponent.handleClick(col);
         }
     };
 
     return (
-        <div className='game-board'>
-            {board.map((row, rowIndex) => (
-                <div key={rowIndex} className='game-row'>
+        <div className="game-board">
+            {boardState.getBoard().map((row, rowIndex) => (
+                <div key={rowIndex} className="game-row">
                     {row.map((cell, colIndex) => (
                         <div
                             key={colIndex}
+                            className={`token ${cell}`}
                             onClick={() => handleClick(colIndex)}
-                            className='token'
-                            style={{
-                                backgroundColor: cell === 'p1' ? 'red' : cell === 'p2' ? 'yellow' : '#2021',
-                            }}
-                        />
+                        >
+                            {cell}
+                        </div>
                     ))}
                 </div>
             ))}
-            {winner && (
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                }}>
-                    <h2 style={{ color: 'white' }}>{winner} wins!</h2>
-                    <button onClick={() => {
-                        setBoard(createBoard());
-                        setCurrentPlayer('p1');
-                        setWinner(null);
-                    }} style={{
-                        padding: '10px 20px',
-                        fontSize: '16px',
-                        cursor: 'pointer',
-                    }}>
-                        Restart Game
-                    </button>
-                </div>
-            )}
-            {draw && (
-                <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                }}>
-                    <h2 style={{ color: 'white' }}>Draw!</h2>
-                    <button onClick={() => {
-                        setBoard(createBoard());
-                        setCurrentPlayer('p1');
-                        setWinner(null);
-                    }} style={{
-                        padding: '10px 20px',
-                        fontSize: '16px',
-                        cursor: 'pointer',
-                    }}>
-                        Restart Game
-                    </button>
-                </div>
-            )}
+            {winner && <div className="error-pannel">Winner: {winner}</div>}
+            {draw && <div className="error-pannel">It's a draw!</div>}
         </div>
     );
 };

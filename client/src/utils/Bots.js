@@ -1,4 +1,3 @@
-import { getValidMoves, isWinningMove } from './game.js';
 import Player from './Player.js';
 
 class Bot extends Player {
@@ -23,7 +22,7 @@ class Bot extends Player {
 // Random Bot
 class RandomBot extends Bot {
     thinkOfMove(board) {
-        const validMoves = getValidMoves(board);
+        const validMoves = board.getValidMoves();
         return validMoves[Math.floor(Math.random() * validMoves.length)];
     }
 }
@@ -31,14 +30,14 @@ class RandomBot extends Bot {
 // Balanced Bot
 class BalancedBot extends Bot {
     thinkOfMove(board) {
-        const validMoves = getValidMoves(board);
+        const validMoves = board.getValidMoves();
         for (let move of validMoves) {
-            if (isWinningMove(board, move, this.role)) {
+            if (board.isWinningMove(move, this.role)) {
                 return move;
             }
         }
         for (let move of validMoves) {
-            if (isWinningMove(board, move, this.opponentRole)) {
+            if (board.isWinningMove(move, this.opponentRole)) {
                 return move;
             }
         }

@@ -18,7 +18,7 @@ function boardToIntState(board) {
     let chunkSize = trinary.length / BOARDSPLITTING;
     let intState = [];
     for (let i = 0; i < BOARDSPLITTING; i++) {
-        intState += parseInt(trinary.slice(i*chunkSize, (i+1)*chunkSize), 3);
+        intState.push(parseInt(trinary.slice(i*chunkSize, (i+1)*chunkSize), 3));
     }
     return intState;
 }
