@@ -30,10 +30,11 @@ function PlayLocal({userInfo}) {
     }
 
     return (
-        <Game 
-            player1={new OfflinePlayer(userInfo.username, userInfo.chipsStyle)}
-            player2={opponent}
-        />
+        <>
+            {userStarts ? 
+                <Game player1={new OfflinePlayer(userInfo.username, userInfo.chipsStyle)} player2={opponent} /> : 
+                <Game player1={opponent} player2={new OfflinePlayer(userInfo.username, userInfo.chipsStyle)} />}
+        </>
     );
 };
 

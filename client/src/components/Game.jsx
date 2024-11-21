@@ -1,34 +1,32 @@
-// TODO adapt the code to the rest of the project
-
 import React, { useState, useEffect } from 'react';
 import Board from '../utils/Board';
-import io from 'socket.io-client';
-
-//const socket = io('http://localhost:4000'); // Replace with your server URL
 
 function Game({player1, player2}) {
     const [board, setBoard] = useState(new Board());
     const [winner, setWinner] = useState(null);
     const [draw, setDraw] = useState(false);
     const currentPlayerName = board.isFirstPlayerTurn ? player1.name : player2.name;
+    const topMessage = winner ? `${winner} wins!` : draw ? "It's a draw!" : `It's ${currentPlayerName}'s turn!`;
 
     useEffect(() => {
         async function waitForMove() {
             if (winner || draw) return;
             let moveSuccessfull = false;
             if(board.isFirstPlayerTurn){
-                const col = player1.pickMove(board);
-                moveSuccessfull = await board.playMove(col);
+                const col = await player1.pickMove(board);
+                moveSuccessfull = board.playMove(col);
             } else {
-                const col = player2.pickMove(board);
-                moveSuccessfull = await board.playMove(col);
+                const col = await player2.pickMove(board);
+                moveSuccessfull = board.playMove(col);
             }
             if (moveSuccessfull) {
                 const newWinner = board.checkWinner();
                 const newDraw = board.isDraw();
                 setWinner(newWinner);
                 setDraw(newDraw);
-                setBoard(new Board(board.getBoard(), board.currentPlayer));
+                setBoard(new Board(board.getBoard(), board.isFirstPlayerTurn));
+            } else {
+                waitForMove();
             }
         }
         waitForMove();
@@ -60,17 +58,17 @@ function Game({player1, player2}) {
 
     return (
         <>
-            <h2>It's {currentPlayerName}'s turn!</h2>
-            <div className="game-board">
-                {boardState.getBoard().map((row, rowIndex) => (
-                    <div key={rowIndex} className="game-row">
-                        {row.map((cellContent, colIndex) => {
-                            renderCell(rowIndex, colIndex, cellContent);
-                        })}
-                    </div>
-                ))}
-                {winner && <div className="error-pannel">Winner: {winner}</div>}
-                {draw && <div className="error-pannel">It's a draw!</div>}
+            <div className='game-view'>
+                <h2>{topMessage}</h2>
+                <div className="game-board">
+                    {/* {board.getBoard().map((row, rowIndex) => (
+                        <div key={rowIndex} className="game-row">
+                            {row.map((cellContent, colIndex) => (
+                                renderCell(rowIndex, colIndex, cellContent)
+                            ))}
+                        </div>
+                    ))} */}
+                </div>
             </div>
         </>
     );
