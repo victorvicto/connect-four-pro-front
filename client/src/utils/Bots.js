@@ -28,16 +28,11 @@ class RandomBot extends Bot {
 }
 
 // Balanced Bot
-class BalancedBot extends Bot {
+class GreedyBot extends Bot {
     thinkOfMove(board) {
         const validMoves = board.getValidMoves();
         for (let move of validMoves) {
-            if (board.isWinningMove(move, this.role)) {
-                return move;
-            }
-        }
-        for (let move of validMoves) {
-            if (board.isWinningMove(move, this.opponentRole)) {
+            if (board.isWinningMove(move)) {
                 return move;
             }
         }
@@ -45,4 +40,4 @@ class BalancedBot extends Bot {
     }
 }
 
-export { RandomBot, BalancedBot };
+export { RandomBot, GreedyBot };

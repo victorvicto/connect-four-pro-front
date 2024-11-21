@@ -6,11 +6,11 @@ import io from 'socket.io-client';
 
 //const socket = io('http://localhost:4000'); // Replace with your server URL
 
-function Game(player1, player2) {
+function Game({player1, player2}) {
     const [board, setBoard] = useState(new Board());
     const [winner, setWinner] = useState(null);
     const [draw, setDraw] = useState(false);
-
+    const currentPlayerName = board.isFirstPlayerTurn ? player1.name : player2.name;
 
     useEffect(() => {
         async function waitForMove() {
@@ -43,8 +43,8 @@ function Game(player1, player2) {
         }
     };
 
-    function renderCell(cell){
-        if (cell === null) {
+    function renderCell(rowIndex, colIndex, cellContent) {
+        if (board.isCellEmpty(rowIndex, colIndex)) {
             return <div key={colIndex} className={`token`} onClick={() => handleClick(colIndex)} />;
         } else {
             return (
@@ -52,24 +52,27 @@ function Game(player1, player2) {
                     key={colIndex}
                     className={`token`}
                     onClick={() => handleClick(colIndex)}
-                    src={"/images/chips/"+(cell === userRole ? userChipsStyle : opponent.chipsStyle)+"_"+cell+".png"}
+                    src={"/images/chips/"+(board.isCellFirstPlayer(rowIndex, colIndex) ? player1.chipsStyle : player2.chipsStyle)+"_"+cellContent+".png"}
                 />
             );
         }
     };
 
     return (
-        <div>
-            <h1>Connect 4</h1>
-            {winner && <h2>Winner: {winner}</h2>}
-            <div className="board">
-                {board.getBoard().map((row, rowIndex) => (
-                    <div className="row" key={rowIndex}>
-                        {row.map((cell, colIndex) => renderCell(rowIndex, colIndex))}
+        <>
+            <h2>It's {currentPlayerName}'s turn!</h2>
+            <div className="game-board">
+                {boardState.getBoard().map((row, rowIndex) => (
+                    <div key={rowIndex} className="game-row">
+                        {row.map((cellContent, colIndex) => {
+                            renderCell(rowIndex, colIndex, cellContent);
+                        })}
                     </div>
                 ))}
+                {winner && <div className="error-pannel">Winner: {winner}</div>}
+                {draw && <div className="error-pannel">It's a draw!</div>}
             </div>
-        </div>
+        </>
     );
 };
 

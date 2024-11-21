@@ -1,24 +1,40 @@
 import React from 'react';
 import { useState } from 'react';
-import OfflineGame from '../components/OfflineGame';
+import Game from '../components/Game';
 import FatButton from '../components/FatButton';
 import OfflinePlayer from '../utils/OfflinePlayer';
-import { RandomBot, BalancedBot } from '../utils/bots';
+import { RandomBot, GreedyBot } from '../utils/bots';
 
 function PlayLocal({userInfo}) {
     const [opponent, setOpponent] = useState(null);
+    const [userStarts, setUserStarts] = useState(null);
 
-    const content = opponent ? (
-        <OfflineGame opponent={opponent} userChipsStyle={userInfo.chipsStyle} />
-    ) : (
-        <div>
-            <FatButton label="Pass and Play" onClick={() => setOpponent(new OfflinePlayer("Player 2"))} />
-            <FatButton label="Tim (Bot)" onClick={() => setOpponent(new RandomBot("Tim"))} />
-            <FatButton label="Charlotte (Bot)" onClick={() => setOpponent(new BalancedBot("Charlotte"))} />
-        </div>
+    if (opponent === null) {
+        return (
+            <div>
+                <FatButton label="Pass and Play" onClick={() => setOpponent(new OfflinePlayer("Guest Player", userInfo.chipsStyle))} />
+                <FatButton label="Tim (Bot)" onClick={() => setOpponent(new RandomBot("Tim"))} />
+                <FatButton label="Charlotte (Bot)" onClick={() => setOpponent(new GreedyBot("Charlotte"))} />
+            </div>
+        );
+    }
+
+    if (userStarts === null) {
+        return (
+            <div>
+                <h1>Who starts?</h1>
+                <FatButton label={userInfo.username} onClick={() => setUserStarts(true)} />
+                <FatButton label={opponent.name} onClick={() => setUserStarts(false)} />
+            </div>
+        );
+    }
+
+    return (
+        <Game 
+            player1={new OfflinePlayer(userInfo.username, userInfo.chipsStyle)}
+            player2={opponent}
+        />
     );
-
-    return content;
 };
 
 export default PlayLocal;

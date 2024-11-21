@@ -1,4 +1,5 @@
 class Board {
+
     constructor(board = null, isFirstPlayerTurn = true, rows = 6, cols = 7) {
         this.rows = rows;
         this.cols = cols;
@@ -20,6 +21,18 @@ class Board {
 
     getBoard() {
         return this.board;
+    }
+
+    getFirstPlayerString() {
+        return 'p1';
+    }
+
+    isCellEmpty(row, col) {
+        return this.board[row][col] === null;
+    }
+
+    isCellFirstPlayer(row, col) {
+        return this.board[row][col] === 'p1';
     }
 
     playMove(col) {
@@ -88,8 +101,9 @@ class Board {
         return validMoves;
     }
 
-    isWinningMove(col, player) {
+    isWinningMove(col) {
         const tempBoard = this.board.map(row => row.slice());
+        const player = this.isFirstPlayerTurn ? 'p1' : 'p2';
         for (let row = tempBoard.length - 1; row >= 0; row--) {
             if (tempBoard[row][col] === null) {
                 tempBoard[row][col] = player;
