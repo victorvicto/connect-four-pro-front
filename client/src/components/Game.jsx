@@ -6,39 +6,56 @@ import io from 'socket.io-client';
 
 //const socket = io('http://localhost:4000'); // Replace with your server URL
 
-const Game = () => {
+function Game(player1, player2) {
     const [board, setBoard] = useState(new Board());
     const [winner, setWinner] = useState(null);
     const [draw, setDraw] = useState(false);
 
 
-    // useEffect(() => {
-    //     // Listen for board updates from the server
-    //     socket.on('boardUpdate', (newBoard) => {
-    //         setBoard(newBoard.board);
-    //         setCurrentPlayer(newBoard.currentPlayer);
-    //         setWinner(newBoard.winner);
-    //     });
+    useEffect(() => {
+        async function waitForMove() {
+            if (winner || draw) return;
+            let moveSuccessfull = false;
+            if(board.isFirstPlayerTurn){
+                const col = player1.pickMove(board);
+                moveSuccessfull = await board.playMove(col);
+            } else {
+                const col = player2.pickMove(board);
+                moveSuccessfull = await board.playMove(col);
+            }
+            if (moveSuccessfull) {
+                const newWinner = board.checkWinner();
+                const newDraw = board.isDraw();
+                setWinner(newWinner);
+                setDraw(newDraw);
+                setBoard(new Board(board.getBoard(), board.currentPlayer));
+            }
+        }
+        waitForMove();
+    }, [board, player1, player2, winner, draw]);
 
-    //     // Clean up the socket connection on component unmount
-    //     return () => {
-    //         socket.off('boardUpdate');
-    //     };
-    // }, []);
-
-    const handleClick = (col) => {
-        if (winner) return;
-
-        // Emit the move to the server
-        socket.emit('makeMove', { col, player: currentPlayer });
+    function handleClick(col) {
+        if (winner || draw) return;
+        if (board.isFirstPlayerTurn) {
+            player1.handleClick(col);
+        } else {
+            player2.handleClick(col);
+        }
     };
 
-    const renderCell = (row, col) => {
-        return (
-            <div className="cell" onClick={() => handleClick(col)} key={col}>
-                {board.getBoard()[row][col]}
-            </div>
-        );
+    function renderCell(cell){
+        if (cell === null) {
+            return <div key={colIndex} className={`token`} onClick={() => handleClick(colIndex)} />;
+        } else {
+            return (
+                <img
+                    key={colIndex}
+                    className={`token`}
+                    onClick={() => handleClick(colIndex)}
+                    src={"/images/chips/"+(cell === userRole ? userChipsStyle : opponent.chipsStyle)+"_"+cell+".png"}
+                />
+            );
+        }
     };
 
     return (

@@ -16,6 +16,10 @@ class Player {
     pickMove(board) {
         throw new Error("Method 'play()' must be implemented.");
     }
+
+    handleClick(col) {
+        console.log("Clicks have no effect during this player's turn ("+this.constructor.name+" "+this.name+").");
+    }
 }
 
 export default Player;
