@@ -61,13 +61,13 @@ function Game({player1, player2}) {
             <div className='game-view'>
                 <h2>{topMessage}</h2>
                 <div className="game-board">
-                    {/* {board.getBoard().map((row, rowIndex) => (
-                        <div key={rowIndex} className="game-row">
-                            {row.map((cellContent, colIndex) => (
-                                renderCell(rowIndex, colIndex, cellContent)
-                            ))}
-                        </div>
-                    ))} */}
+                        {/* {board.getBoard().map((row, rowIndex) => (
+                            <div key={rowIndex} className="game-row">
+                                {row.map((cellContent, colIndex) => (
+                                    renderCell(rowIndex, colIndex, cellContent)
+                                ))}
+                            </div>
+                        ))} */}
                 </div>
             </div>
         </>

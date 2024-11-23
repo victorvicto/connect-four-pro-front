@@ -279,14 +279,20 @@ h1 {
 }
 
 .game-board {
-    aspect-ratio: 7/6;
-    background-color: red;
-}
-
-.game-row {
+    aspect-ratio: 7 / 6;
+    width: min(100%, calc(75vh * 7/6));
+    height: auto;
+    border: 1px solid red;
     display: flex;
     gap: 5px;
+}
+
+.game-column {
+    display: flex;
     flex-grow: 1;
+    flex-direction: column;
+    gap: 5px;
+    align-content: space-around;
     border: 1px solid green;
 }
 
@@ -295,11 +301,10 @@ h1 {
     flex-direction: column;
     gap: 5px;
     width: 100%;
-    max-height: 75vh;
-    border: 1px solid red;
 }
 
 .token {
     border-radius: 50%;
+    flex-grow: 1;
     background-color: var(--main-shadow);
 }
