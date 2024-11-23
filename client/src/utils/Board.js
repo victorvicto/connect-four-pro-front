@@ -1,8 +1,8 @@
 class Board {
 
-    constructor(board = null, isFirstPlayerTurn = true, rows = 6, cols = 7) {
-        this.rows = rows;
+    constructor(board = null, isFirstPlayerTurn = true, cols = 7, rows = 6) {
         this.cols = cols;
+        this.rows = rows;
         if (board === null){
             this.board = this.createBoard();
         } else {
@@ -13,8 +13,8 @@ class Board {
 
     createBoard() {
         const board = [];
-        for (let i = 0; i < this.rows; i++) {
-            board.push(Array(this.cols).fill(null));
+        for (let i = 0; i < this.cols; i++) {
+            board.push(Array(this.rows).fill(null));
         }
         return board;
     }
@@ -27,19 +27,19 @@ class Board {
         return 'p1';
     }
 
-    isCellEmpty(row, col) {
-        return this.board[row][col] === null;
+    isCellEmpty(col, row) {
+        return this.board[col][row] === null;
     }
 
-    isCellFirstPlayer(row, col) {
-        return this.board[row][col] === 'p1';
+    isCellFirstPlayer(col, row) {
+        return this.board[col][row] === 'p1';
     }
 
     playMove(col) {
         if(col < 0 || col >= this.cols) return false;
         for (let row = this.rows - 1; row >= 0; row--) {
-            if (!this.board[row][col]) {
-                this.board[row][col] = this.isFirstPlayerTurn ? 'p1' : 'p2';
+            if (!this.board[col][row]) {
+                this.board[col][row] = this.isFirstPlayerTurn ? 'p1' : 'p2';
                 this.isFirstPlayerTurn = !this.isFirstPlayerTurn;
                 return true;
             }
@@ -48,16 +48,16 @@ class Board {
     }
 
     checkWinner() {
-        const checkDirection = (row, col, rowDir, colDir) => {
-            const player = this.board[row][col];
+        const checkDirection = (col, row, rowDir, colDir) => {
+            const player = this.board[col][row];
             if (!player) return null;
             for (let i = 1; i < 4; i++) {
                 const newRow = row + rowDir * i;
                 const newCol = col + colDir * i;
                 if (
-                    newRow < 0 || newRow >= this.rows ||
                     newCol < 0 || newCol >= this.cols ||
-                    this.board[newRow][newCol] !== player
+                    newRow < 0 || newRow >= this.rows ||
+                    this.board[newCol][newRow] !== player
                 ) {
                     return false;
                 }
@@ -65,16 +65,16 @@ class Board {
             return true;
         };
 
-        for (let row = 0; row < this.rows; row++) {
-            for (let col = 0; col < this.cols; col++) {
-                if (this.board[row][col]) {
+        for (let col = 0; col < this.cols; col++) {
+            for (let row = 0; row < this.rows; row++) {
+                if (this.board[col][row]) {
                     if (
-                        checkDirection(row, col, 0, 1) || // Horizontal
-                        checkDirection(row, col, 1, 0) || // Vertical
-                        checkDirection(row, col, 1, 1) || // Diagonal down-right
-                        checkDirection(row, col, 1, -1)   // Diagonal down-left
+                        checkDirection(col, row, 0, 1) || // Horizontal
+                        checkDirection(col, row, 1, 0) || // Vertical
+                        checkDirection(col, row, 1, 1) || // Diagonal down-right
+                        checkDirection(col, row, 1, -1)   // Diagonal down-left
                     ) {
-                        return this.board[row][col];
+                        return this.board[col][row];
                     }
                 }
             }
@@ -83,7 +83,7 @@ class Board {
     }
 
     isDraw() {
-        return this.board[0].every(cell => cell !== null);
+        return this.board.every(col => col[0] !== null);
     }
 
     resetBoard() {
@@ -94,7 +94,7 @@ class Board {
     getValidMoves() {
         const validMoves = [];
         for (let col = 0; col < this.cols; col++) {
-            if (this.board[0][col] === null) {
+            if (this.board[col][0] === null) {
                 validMoves.push(col);
             }
         }
@@ -102,11 +102,11 @@ class Board {
     }
 
     isWinningMove(col) {
-        const tempBoard = this.board.map(row => row.slice());
+        const tempBoard = this.board.map(col => col.slice());
         const player = this.isFirstPlayerTurn ? 'p1' : 'p2';
         for (let row = tempBoard.length - 1; row >= 0; row--) {
-            if (tempBoard[row][col] === null) {
-                tempBoard[row][col] = player;
+            if (tempBoard[col][row] === null) {
+                tempBoard[col][row] = player;
                 break;
             }
         }

@@ -41,16 +41,15 @@ function Game({player1, player2}) {
         }
     };
 
-    function renderCell(rowIndex, colIndex, cellContent) {
-        if (board.isCellEmpty(rowIndex, colIndex)) {
-            return <div key={colIndex} className={`token`} onClick={() => handleClick(colIndex)} />;
+    function renderCell(colIndex, rowIndex, cellContent) {
+        if (board.isCellEmpty(colIndex, rowIndex)) {
+            return <div key={rowIndex} className={`token`} />;
         } else {
             return (
                 <img
-                    key={colIndex}
+                    key={rowIndex}
                     className={`token`}
-                    onClick={() => handleClick(colIndex)}
-                    src={"/images/chips/"+(board.isCellFirstPlayer(rowIndex, colIndex) ? player1.chipsStyle : player2.chipsStyle)+"_"+cellContent+".png"}
+                    src={"/images/chips/"+(board.isCellFirstPlayer(colIndex, rowIndex) ? player1.chipsStyle : player2.chipsStyle)+"_"+cellContent+".png"}
                 />
             );
         }
@@ -61,13 +60,13 @@ function Game({player1, player2}) {
             <div className='game-view'>
                 <h2>{topMessage}</h2>
                 <div className="game-board">
-                        {/* {board.getBoard().map((row, rowIndex) => (
-                            <div key={rowIndex} className="game-row">
-                                {row.map((cellContent, colIndex) => (
-                                    renderCell(rowIndex, colIndex, cellContent)
+                        {board.getBoard().map((col, colIndex) => (
+                            <div key={colIndex} className="game-column">
+                                {col.map((cellContent, rowIndex) => (
+                                    renderCell(colIndex, rowIndex, cellContent)
                                 ))}
                             </div>
-                        ))} */}
+                        ))}
                 </div>
             </div>
         </>
