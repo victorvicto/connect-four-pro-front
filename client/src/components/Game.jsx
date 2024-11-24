@@ -61,7 +61,7 @@ function Game({player1, player2}) {
                 <h2>{topMessage}</h2>
                 <div className="game-board">
                         {board.getBoard().map((col, colIndex) => (
-                            <div key={colIndex} className="game-column">
+                            <div key={colIndex} className="game-column" onClick={()=>handleClick(colIndex)}>
                                 {col.map((cellContent, rowIndex) => (
                                     renderCell(colIndex, rowIndex, cellContent)
                                 ))}
