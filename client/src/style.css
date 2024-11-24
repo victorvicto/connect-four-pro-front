@@ -283,18 +283,15 @@ h1 {
     aspect-ratio: calc(7 + 6*var(--space-between-chips-ratio)) / calc(6 + 5*var(--space-between-chips-ratio));
     width: min(100%, calc(75vh * 7/6));
     height: auto;
-    border: 1px solid red;
     display: flex;
-    gap: 5px;
+    gap: calc(100% / calc(calc(7/var(--space-between-chips-ratio)) + 6));
 }
 
 .game-column {
     display: flex;
     flex-grow: 1;
     flex-direction: column;
-    /* gap: 5px; */
     justify-content: space-between;
-    border: 1px solid green;
 }
 
 .game-view{
@@ -306,7 +303,6 @@ h1 {
 
 .token {
     border-radius: 50%;
-    /* flex-grow: 1; */
     aspect-ratio: 1 / 1;
     background-color: var(--main-shadow);
 }
