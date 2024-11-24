@@ -1,8 +1,8 @@
 import Player from './Player';
 
 class OfflinePlayer extends Player {
-    constructor() {
-        super();
+    constructor(name, chipsStyle=null) {
+        super(name, chipsStyle);
         this.resolveMove = null;
     }
 

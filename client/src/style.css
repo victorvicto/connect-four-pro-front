@@ -305,3 +305,7 @@ h1 {
     width: 100%;
     background-color: var(--main-shadow);
 }
+
+.uninteractable .token {
+    opacity: 0.7;
+}

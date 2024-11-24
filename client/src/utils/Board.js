@@ -6,7 +6,7 @@ class Board {
         if (board === null){
             this.board = this.createBoard();
         } else {
-            this.board = board;
+            this.board = board.map(col => col.slice());
         }
         this.isFirstPlayerTurn = isFirstPlayerTurn;
     }
@@ -47,7 +47,8 @@ class Board {
         return false;
     }
 
-    checkWinner() {
+    // returns true if first player won, false if second player won, and null if no one won
+    checkFirstPlayerWinner() {
         const checkDirection = (col, row, rowDir, colDir) => {
             const player = this.board[col][row];
             if (!player) return null;
@@ -74,7 +75,7 @@ class Board {
                         checkDirection(col, row, 1, 1) || // Diagonal down-right
                         checkDirection(col, row, 1, -1)   // Diagonal down-left
                     ) {
-                        return this.board[col][row];
+                        return this.board[col][row] === 'p1';
                     }
                 }
             }
@@ -102,15 +103,9 @@ class Board {
     }
 
     isWinningMove(col) {
-        const tempBoard = this.board.map(col => col.slice());
-        const player = this.isFirstPlayerTurn ? 'p1' : 'p2';
-        for (let row = tempBoard.length - 1; row >= 0; row--) {
-            if (tempBoard[col][row] === null) {
-                tempBoard[col][row] = player;
-                break;
-            }
-        }
-        return this.checkWinner(tempBoard) === player;
+        const tempBoard = new Board(this.board, this.isFirstPlayerTurn);
+        tempBoard.playMove(col);
+        return tempBoard.checkFirstPlayerWinner() === this.isFirstPlayerTurn;
     }
 
     // boardToIntState() {

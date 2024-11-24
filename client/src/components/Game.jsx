@@ -6,7 +6,8 @@ function Game({player1, player2}) {
     const [winner, setWinner] = useState(null);
     const [draw, setDraw] = useState(false);
     const currentPlayerName = board.isFirstPlayerTurn ? player1.name : player2.name;
-    const topMessage = winner ? `${winner} wins!` : draw ? "It's a draw!" : `It's ${currentPlayerName}'s turn!`;
+    const winnerName = winner ? player1.name : player2.name;
+    const topMessage = winner != null ? `${winnerName} wins!` : draw ? "It's a draw!" : `It's ${currentPlayerName}'s turn!`;
 
     useEffect(() => {
         async function waitForMove() {
@@ -20,7 +21,7 @@ function Game({player1, player2}) {
                 moveSuccessfull = board.playMove(col);
             }
             if (moveSuccessfull) {
-                const newWinner = board.checkWinner();
+                const newWinner = board.checkFirstPlayerWinner();
                 const newDraw = board.isDraw();
                 setWinner(newWinner);
                 setDraw(newDraw);
@@ -59,7 +60,7 @@ function Game({player1, player2}) {
         <>
             <div className='game-view'>
                 <h2>{topMessage}</h2>
-                <div className="game-board">
+                <div className={"game-board" + ((winner!=null || draw) ? " uninteractable" : "")}>
                         {board.getBoard().map((col, colIndex) => (
                             <div key={colIndex} className="game-column" onClick={()=>handleClick(colIndex)}>
                                 {col.map((cellContent, rowIndex) => (
