@@ -17,7 +17,7 @@ router.post('/login',
     (req, res, next) => {
         console.log("accessing login");
         console.log(req.session);
-        res.json({message: "authentication complete"}); // TODO generate and include jwt here
+        res.json({message: "authentication complete"});
 });
 
 router.post('/register',

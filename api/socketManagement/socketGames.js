@@ -57,6 +57,11 @@ function initializeSocket(server) {
 
         socket.on('disconnect', () => {
             console.log('User disconnected:', socket.id);
+            // Remove the player from the pool if they disconnect
+            const index = matchmakingPool.findIndex(player => player.socketId === socket.id);
+            if (index !== -1) {
+                matchmakingPool.splice(index, 1);
+            }
         });
     });
 
