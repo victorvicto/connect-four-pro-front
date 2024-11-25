@@ -5,6 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 var passport = require('passport');
 const initializeSocket = require('./socketManager');
+const MongoStore = require('connect-mongo');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.ATLAS_KEY, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -23,6 +24,15 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+const sessionMiddleware = session({
+    secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.ATLAS_KEY })
+});
+
+app.use(sessionMiddleware);
+
 // requires the model with Passport-Local Mongoose plugged in
 const User = require('./models/users');
 
@@ -32,12 +42,6 @@ passport.use(User.createStrategy());
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-app.use(session({
-    secret: process.env.SESSION_SECRET_KEY,  // a secret string used to sign the session ID cookie
-    resave: false,  // don't save session if unmodified
-    saveUninitialized: false  // don't create session until something stored
-  }))
 
 // Initialize Passport and session management
 app.use(passport.initialize());
