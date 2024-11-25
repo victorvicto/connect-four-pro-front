@@ -4,6 +4,7 @@ var session = require('express-session');
 const cors = require('cors');
 require('dotenv').config();
 var passport = require('passport');
+const initializeSocket = require('./socketManager');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.ATLAS_KEY, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -57,6 +58,8 @@ app.get('/*', (req, res) => {
 app.use((err, req, res, next) => {
     res.status(500).json({message: err});
 });
+
+const io = initializeSocket(server);
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
