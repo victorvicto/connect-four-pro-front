@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Game from '../components/Game';
 import FatButton from '../components/FatButton';
-import OfflinePlayer from '../utils/OfflinePlayer';
+import { LocalPlayer } from '../utils/LocalPlayer';
 import { RandomBot, GreedyBot } from '../utils/bots';
 
 function PlayLocal({userInfo}) {
@@ -12,7 +12,7 @@ function PlayLocal({userInfo}) {
     if (opponent === null) {
         return (
             <div>
-                <FatButton label="Pass and Play" onClick={() => setOpponent(new OfflinePlayer("Guest Player", userInfo.chipsStyle))} />
+                <FatButton label="Pass and Play" onClick={() => setOpponent(new LocalPlayer("Guest Player", userInfo.chipsStyle))} />
                 <FatButton label="Tim (Bot)" onClick={() => setOpponent(new RandomBot("Tim"))} />
                 <FatButton label="Charlotte (Bot)" onClick={() => setOpponent(new GreedyBot("Charlotte"))} />
             </div>
@@ -32,8 +32,8 @@ function PlayLocal({userInfo}) {
     return (
         <>
             {userStarts ? 
-                <Game player1={new OfflinePlayer(userInfo.username, userInfo.chipsStyle)} player2={opponent} /> : 
-                <Game player1={opponent} player2={new OfflinePlayer(userInfo.username, userInfo.chipsStyle)} />}
+                <Game player1={new LocalPlayer(userInfo.username, userInfo.chipsStyle)} player2={opponent} /> : 
+                <Game player1={opponent} player2={new LocalPlayer(userInfo.username, userInfo.chipsStyle)} />}
         </>
     );
 };

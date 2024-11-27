@@ -4,7 +4,7 @@ var session = require('express-session');
 const cors = require('cors');
 require('dotenv').config();
 var passport = require('passport');
-const initializeSocket = require('./socketManager');
+const initializeSocket = require('./socketManagement/socketGames');
 const MongoStore = require('connect-mongo');
 
 const mongoose = require('mongoose');
@@ -63,8 +63,8 @@ app.use((err, req, res, next) => {
     res.status(500).json({message: err});
 });
 
-const io = initializeSocket(server);
-
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`server running on port ${port}`);
-})
+});
+
+const io = initializeSocket(server);

@@ -1,18 +1,13 @@
 import Player from './Player';
-import io from 'socket.io-client';
 
 class OnlinePlayer extends Player {
-    constructor(name, chipsStyle = null, gameId) {
+    constructor(name, chipsStyle = null, socket) {
         super(name, chipsStyle);
-        this.socket = io('http://localhost:3001');
-        this.gameId = gameId;
+        this.socket = socket;
         this.resolveMove = null;
 
-        this.socket.on('connect', () => {
-            this.socket.emit('joinGame', gameId);
-        });
-
         this.socket.on('moveMade', (col) => {
+            console.log('Move made:', col, 'by', this.name);
             if (this.resolveMove) {
                 this.resolveMove(col);
                 this.resolveMove = null;
@@ -24,10 +19,6 @@ class OnlinePlayer extends Player {
         return new Promise((resolve) => {
             this.resolveMove = resolve;
         });
-    }
-
-    handleClick(col) {
-        this.socket.emit('makeMove', { gameId: this.gameId, col });
     }
 }
 
