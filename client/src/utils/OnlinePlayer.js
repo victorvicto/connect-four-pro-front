@@ -8,6 +8,7 @@ class OnlinePlayer extends Player {
 
         this.socket.on('moveMade', (col) => {
             console.log('Move made:', col, 'by', this.name);
+            // TODO: Check if the move is valid, send error if not
             if (this.resolveMove) {
                 this.resolveMove(col);
                 this.resolveMove = null;
