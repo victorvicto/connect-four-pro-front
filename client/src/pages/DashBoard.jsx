@@ -51,10 +51,10 @@ function Dashboard() {
                 <div className="dashboard-content">
                     <div className="dashboard-top-bar"></div>
                     <Routes>
-                        <Route path="profile" element={<Profile userInfo={userInfo} />} />
-                        <Route path="play-online" element={<PlayOnline userInfo={userInfo} />} />
+                        <Route path="profile" element={<Profile userInfo={userInfo} setUserInfo={setUserInfo} />} />
+                        <Route path="play-online" element={<PlayOnline userInfo={userInfo} setUserInfo={setUserInfo} />} />
                         <Route path="play-local" element={<PlayLocal userInfo={userInfo} />} />
-                        <Route path="settings" element={<Settings userInfo={userInfo} />} />
+                        <Route path="settings" element={<Settings userInfo={userInfo} setUserInfo={setUserInfo} />} />
                     </Routes>
                 </div>
             </div>

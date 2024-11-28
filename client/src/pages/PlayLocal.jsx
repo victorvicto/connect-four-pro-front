@@ -13,8 +13,8 @@ function PlayLocal({userInfo}) {
         return (
             <div>
                 <FatButton label="Pass and Play" onClick={() => setOpponent(new LocalPlayer("Guest Player", userInfo.chipsStyle))} />
-                <FatButton label="Tim (Bot)" onClick={() => setOpponent(new RandomBot("Tim"))} />
-                <FatButton label="Charlotte (Bot)" onClick={() => setOpponent(new GreedyBot("Charlotte"))} />
+                <FatButton label="Tim (Bot)" onClick={() => setOpponent(new RandomBot("Tim", "nature_star"))} />
+                <FatButton label="Charlotte (Bot)" onClick={() => setOpponent(new GreedyBot("Charlotte", "pirate_skull"))} />
             </div>
         );
     }

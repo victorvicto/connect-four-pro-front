@@ -4,7 +4,7 @@ import Game from '../components/Game';
 import { LocalOnlinePlayer } from '../utils/LocalPlayer';
 import OnlinePlayer from '../utils/OnlinePlayer';
 
-function PlayOnline({ userInfo }) {
+function PlayOnline({ userInfo, setUserInfo }) {
     const [gameId, setGameId] = React.useState('');
     const [opponent, setOpponent] = React.useState(null);
     const [starts, setStarts] = React.useState(false);
@@ -48,8 +48,8 @@ function PlayOnline({ userInfo }) {
         );
     }
 
-    const localPlayer = new LocalOnlinePlayer(userInfo.username , userInfo.chipStyle, socket, gameId);
-    const remotePlayer = new OnlinePlayer(opponent.username, opponent.chipStyle, socket, gameId);
+    const localPlayer = new LocalOnlinePlayer(userInfo.username , userInfo.chipsStyle, socket, gameId);
+    const remotePlayer = new OnlinePlayer(opponent.username, opponent.chipsStyle, socket, gameId);
 
     return (
         <Game player1={starts ? localPlayer : remotePlayer} player2={starts ? remotePlayer : localPlayer} />

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import ChipsStylePicker from '../components/ChipsStylePicker';
 
-function Profile({ userInfo }) {
+function Profile({ userInfo, setUserInfo }) {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -25,6 +26,7 @@ function Profile({ userInfo }) {
             <img src={userInfo.profilePicture} alt="Profile" className="profile-picture" />
             <h1>{userInfo.username} {userInfo.elo} elo</h1>
             <p>{userInfo.email}</p>
+            <ChipsStylePicker userInfo={userInfo} setUserInfo={setUserInfo} />
             <button onClick={handleLogout}>Logout</button>
         </div>
     );

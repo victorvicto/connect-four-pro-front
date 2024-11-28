@@ -1,3 +1,4 @@
+/* TODO: split css per relevant page */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,600,800');
 
 body{
@@ -7,8 +8,10 @@ body{
     --main-bg-color: rgb(255, 206, 188);
     --secondary-bg-color: rgb(218, 146, 113);
     --main-primary-color: rgb(65, 65, 134);
+    --main-highlight-color: rgb(0, 213, 255);
     --main-primary-color-dark: #225;
     --main-shadow: #2021;
+    --main-lighter: #fff2d721;
     --main-font-color: var(--main-primary-color);
     --error-font-color: crimson;
     --main-font-weight: 600;
@@ -22,6 +25,7 @@ body{
     --large-padding: 3em;
     --burger-btn-size: 10vh;
     --space-between-chips-ratio: 0.1;
+    --main-border-width: 3px;
     color: var(--main-font-color);
     font-weight: var(--main-font-weight);
     font-size: var(--main-font-size);
@@ -275,6 +279,25 @@ h1 {
     margin-bottom: 20px;
 }
 
+.chips-style-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 20px;
+}
+
+.chip-style {
+    height: 15vh;
+    border-radius: var(--main-border-radius);
+}
+
+.chip-style.selected {
+    border: var(--main-border-width) solid var(--main-highlight-color);
+}
+
+.chip-style img {
+    width: 100%;
+}
+
 .light {
     color: var(--main-white);
 }
@@ -303,7 +326,21 @@ h1 {
     border-radius: 50%;
     aspect-ratio: 1 / 1;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-board.to-be-clicked .game-column:hover .token:last-of-type:after {
+    content: " ";
     background-color: var(--main-shadow);
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    width: 50%;
+}
+
+img.token {
+    box-shadow: 5pt 5pt var(--main-shadow);
 }
 
 .uninteractable .token {

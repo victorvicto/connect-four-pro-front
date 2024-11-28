@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Board from '../utils/Board';
+import { LocalPlayer } from '../utils/LocalPlayer';
 
 function Game({player1, player2}) {
     const [board, setBoard] = useState(new Board());
     const [winner, setWinner] = useState(null);
     const [draw, setDraw] = useState(false);
-    const currentPlayerName = board.isFirstPlayerTurn ? player1.name : player2.name;
+    const currentPlayer = board.isFirstPlayerTurn ? player1 : player2;
     const winnerName = winner ? player1.name : player2.name;
-    const topMessage = winner != null ? `${winnerName} wins!` : draw ? "It's a draw!" : `It's ${currentPlayerName}'s turn!`;
+    const topMessage = winner != null ? `${winnerName} wins!` : draw ? "It's a draw!" : `It's ${currentPlayer.name}'s turn!`;
 
     useEffect(() => {
         async function waitForMove() {
@@ -56,11 +57,13 @@ function Game({player1, player2}) {
         }
     };
 
+    const canBeClicked = currentPlayer instanceof LocalPlayer;
+
     return (
         <>
             <div className='game-view'>
                 <h2>{topMessage}</h2>
-                <div className={"game-board" + ((winner!=null || draw) ? " uninteractable" : "")}>
+                <div className={"game-board" + ((winner!=null || draw) ? " uninteractable" : (canBeClicked ? " to-be-clicked" : ""))}>
                         {board.getBoard().map((col, colIndex) => (
                             <div key={colIndex} className="game-column" onClick={()=>handleClick(colIndex)}>
                                 {col.map((cellContent, rowIndex) => (
