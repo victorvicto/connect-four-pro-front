@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import Game from '../components/Game';
 import { LocalOnlinePlayer } from '../utils/LocalPlayer';
 import OnlinePlayer from '../utils/OnlinePlayer';
+import FatButton from '../components/FatButton';
 
 function PlayOnline({ userInfo, setUserInfo }) {
     const [gameId, setGameId] = React.useState('');
@@ -43,7 +44,7 @@ function PlayOnline({ userInfo, setUserInfo }) {
     if (!gameId) {
         return (
             <div>
-                <button onClick={handleFindGame}>Start game</button>
+                <FatButton label={"Find Game"} onClick={handleFindGame} />
             </div>
         );
     }
