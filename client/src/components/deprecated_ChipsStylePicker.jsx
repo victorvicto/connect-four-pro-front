@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function ChipsStylePicker({ userInfo, setUserInfo }) {
-    const [darkChipsColor, setDarkChipsColor] = useState(0);
-    const [lightChipsColor, setLightChipsColor] = useState(0);
-    const [darkHighlightColor, setDarkHighlightColor] = useState(0);
-    const [lightHighlightColor, setLightHighlightColor] = useState(0);
-    const [darkCrownImg, setDarkCrownImg] = useState("default");
-    const [lightCrownImg, setLightCrownImg] = useState("default");
-    const [darkMainImg, setDarkMainImg] = useState("default");
-    const [lightMainImg, setLightMainImg] = useState("default");
+    const [chipStyles, setChipStyles] = useState([]);
 
     useEffect(() => {
         // Fetch the list of chip styles from the public folder

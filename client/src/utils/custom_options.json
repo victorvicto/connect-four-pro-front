@@ -1,0 +1,14 @@
+{
+    "dark_chip_background_colors": [
+        {"hue":0, "brightness":70, "saturation":100}
+    ],
+    "light_chip_background_colors": [
+        {"hue":0, "brightness":100, "saturation":100}
+    ],
+    "dark_chip_highlight_colors": [
+        {"hue":0, "brightness":100, "saturation":0}
+    ],
+    "light_chip_highlight_colors": [
+        {"hue":0, "brightness":100, "saturation":0}
+    ]
+}
